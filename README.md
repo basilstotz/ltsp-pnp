@@ -1,9 +1,10 @@
-# ltsp-pnp
-Install and manage a ltsp-pnp system (on ubuntu 14.04)
+# Install and manage a ltsp-pnp system (on ubuntu 14.04)
 
-## Installation of a ltsp-pnp server 
 
-* Install a common ubuntu 14.04 (desktop-edition)
+
+## Installation of the ltsp-pnp server 
+
+* Install a common ubuntu 14.04 (desktop-edition). If you have any 32-bit clients must use a 32-bit server installation! 
 
 * Install ltsp-pnp_1.0_all.deb (this deb!)
 
@@ -13,6 +14,6 @@ Install and manage a ltsp-pnp system (on ubuntu 14.04)
 
 ##Maintenance
 
-* Upgrade installation
+* Upgrade/modify installation on server
 
 * run "sudo /opt/ltsp-pnp/bin/ltsp-pnp-update-image"
