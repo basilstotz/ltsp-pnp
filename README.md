@@ -9,8 +9,7 @@ see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (germ
 * Install ltsp-pnp_1.0_all.deb (this deb!)
 
 * run "sudo /opt/ltsp-pnp/bin/ltsp-pnp-install"
-
-* 
+ 
 
 ##Maintenance
 
