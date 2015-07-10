@@ -1,0 +1,28 @@
+Format: 1.8
+Date: Fri, 10 Jul 2015 12:44:59 +0200
+Source: ltsp-pnp
+Binary: ltsp-pnp
+Architecture: source all
+Version: 1.0
+Distribution: unstable
+Urgency: low
+Maintainer: Basil Stotz <stotz@amxa.ch>
+Changed-By: Basil Stotz <stotz@amxa.ch>
+Description: 
+ ltsp-pnp   - Install and manage ltsp-pnp system (on ubuntu 14.04)
+Changes: 
+ ltsp-pnp (1.0) unstable; urgency=low
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Checksums-Sha1: 
+ 04e9b6c1561daa11345e2f9b284237fcb58b1fd7 537 ltsp-pnp_1.0.dsc
+ c202c5f8cea14955d454c8035848f3ced28eed37 12408 ltsp-pnp_1.0.tar.gz
+ 338cedffcf78af312e02c813a3d4966cd2353f2b 2254 ltsp-pnp_1.0_all.deb
+Checksums-Sha256: 
+ 9ec167666dfdffea848d4d9a29cfcf70997ec037c81f4916e384adab40980892 537 ltsp-pnp_1.0.dsc
+ 604deaaf10f6d7cf58e629e64502dc1b213c5bf91f8d9c6bcbda2815758306f2 12408 ltsp-pnp_1.0.tar.gz
+ a953c70f967e231c79c72a3e65dac7c85fdb3564d1366180d377763f21951a3f 2254 ltsp-pnp_1.0_all.deb
+Files: 
+ fd2497e3263b1426e5fbad74e4c32566 537 unknown optional ltsp-pnp_1.0.dsc
+ d5ad1ea4cf5c47aaadd30ccc4152eaa9 12408 unknown optional ltsp-pnp_1.0.tar.gz
+ 04428cc0dd65ca075f56b4cc55e8ba29 2254 unknown optional ltsp-pnp_1.0_all.deb

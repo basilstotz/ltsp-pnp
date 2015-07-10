@@ -1,0 +1,5 @@
+ltsp-pnp (1.0) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Basil Stotz <stotz@amxa.ch>  Fri, 10 Jul 2015 12:44:59 +0200
