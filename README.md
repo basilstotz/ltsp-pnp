@@ -1,6 +1,6 @@
 # Install and manage a ltsp-pnp system (on ubuntu 14.04)
 
-
+see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (german!) instructions. 
 
 ## Installation of the ltsp-pnp server 
 
