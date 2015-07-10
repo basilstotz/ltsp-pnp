@@ -4,7 +4,7 @@ see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (germ
 
 ## Installation of the ltsp-pnp server 
 
-* Install a common ubuntu 14.04 (desktop-edition). If you have any 32-bit clients must use a 32-bit server installation! 
+* Install a common ubuntu 14.04 (desktop-edition). Use a 32-bit installation. Don't worry: A standard 32-bit installlation manages any amount of menory! 
 
 * Install ltsp-pnp_1.0_all.deb (this deb!)
 
