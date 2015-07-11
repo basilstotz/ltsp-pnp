@@ -1,6 +1,23 @@
 #!/bin/bash
 
 # Skript muss in einer root-shell ausgeführt werden, indem man vorher sudo su ausführt
+if test $USER!="root"; then 
+   echo "error: not root!"
+   echo
+   echo "type: sudo $0"
+   echo
+   echo "Exiting...";
+   exit 1;
+fi
+
+if test -d "/opt/ltsp/images/"; then 
+  echo "error: looks like ltsp is already installed!"
+  echo 
+  echo "Exiting...";
+  exit 1;
+fi 
+
+exit
 
 # Installieren der LTSP-PNP-Umgebung
 apt-get --yes install dnsmasq ltsp-server ltsp-client ldm-ubuntu-theme
