@@ -64,8 +64,10 @@ All clients are exactly equal to the server:
 
 * To upgrade the clients: Upgrade the server
 
-* To change IP address of server 
+* To change IP address of server
 
-run "sudo /opt/ltsp-pnp/bin/ltsp-pnp-update-image"
+To propagate changes to clients you must run: 
 
-This command clones the server for all clients.
+"sudo /opt/ltsp-pnp/bin/ltsp-pnp-update-image"
+
+This command clones all server features to all clients.
