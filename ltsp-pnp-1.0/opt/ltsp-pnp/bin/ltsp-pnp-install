@@ -3,7 +3,7 @@
 # Skript muss in einer root-shell ausgeführt werden, indem man vorher sudo su ausführt
 
 # Installieren der LTSP-PNP-Umgebung
-apt-get install dnsmasq ltsp-server ltsp-client ldm-ubuntu-theme
+apt-get --yes install dnsmasq ltsp-server ltsp-client ldm-ubuntu-theme
 
 # dnsmasq wird als Proxy-DHCP-Server konfiguriert
 ltsp-config dnsmasq
