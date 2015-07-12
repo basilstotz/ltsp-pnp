@@ -8,7 +8,7 @@ This guide shows how to install a vanilla Ubuntu LTSP server. Vanilla LTSP is su
 
 All clients have to be connected by a patchwork cable. It does not work over wifi. 
 
-## Info: LTSP vs Puavo
+## OT Info: LTSP vs Puavo
 
 Puavo is directly built on top of LTSP and adds some important features:
 
