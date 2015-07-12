@@ -2,15 +2,37 @@
 
 see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (german!) instructions. 
 
+## Introduction
+
+Vanilla LTSP is suited for small orgnizations with a few (maybe max. 20) Users with the about the same amount of clients. 
+
+All clients have to be connected by a patchwork cable. It does not work over wifi. 
+
+Puavo is build on top of LTSP and adds some important features:
+
+* Puavo can handle laptops. These LTSP laptops also work over wlan or  even without an network connection.
+
+* Puavo can easily handle tenthousend and more  users, desktops and laptops.
+
+* The Puavo service provides all programms, updates and upgrades automaticly
+
+* All Puavo clients on a patch cable can be transformed into a WiFi hotspot
+
+* Puavo service also includes the ltsp-pnp server with all hardware and software support.
+
+ 
+
 ## Network
 
 This setup asumes that you have a standard home network: You have a router, which provides internet and and a DHCP service? That's fine.
 
-You might want to configure your router to serve a static address for the ltsp-pnp-server. It's allways a good idea, when servers have fix IP addresses,
+You might want to configure your router to serve a static address for the ltsp-pnp-server. It's allways a good idea, when servers have fix IP addresses.
 
-Plug the ltsp-pnp server and all clients in a normal 1 GBit/s switch with enough port for all your clients plus one extra port for the router.
+Plug the ltsp-pnp server and all clients in a normal 1 GBit/s switch with enough ports for all your clients plus one extra port for the router.
 
-Connect the switch with your router.
+Connect the switch with your router or a wall plug, which is connected with the router.
+
+
 
 ## Server
 
