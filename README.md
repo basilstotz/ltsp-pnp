@@ -8,23 +8,6 @@ This guide shows how to install a vanilla Ubuntu LTSP server. Vanilla LTSP is su
 
 All clients have to be connected by a patchwork cable. It does not work over wifi. 
 
-## OT Info: LTSP vs Puavo
-
-Puavo is directly built on top of LTSP and adds some important features:
-
-* Puavo can handle laptops. These LTSP laptops also work over wlan or  even without an network connection.
-
-* Puavo can easily handle tenthousend and more  users, desktops and laptops.
-
-* All Puavo clients on a patch cable can be transformed into a WiFi hotspot
-
-* The Puavo as a service provides the complete maintainance of the client software
-
-* The Puavo as a service provides the complete ltsp-pnp server with full care of the the server.
-
-This means Puavo adminstrators care only about the client setup. All the rest is handled by the Puavo software or by Puavo as a service.
-
-Now back to the vanilla ltsp-pnp installation!  
 
 ## Network
 
@@ -99,3 +82,21 @@ To propagate all these changes to clients you must run:
 "sudo /opt/ltsp-pnp/bin/ltsp-pnp-update-image"
 
 This command clones all server features to all clients. It takes some minutes and all clients have, after a reboot, all new fetures.
+
+## OT Info: LTSP vs Puavo
+
+Puavo is directly built on top of LTSP and adds some important features:
+
+* Puavo can handle laptops. These LTSP laptops also work over wlan or  even without an network connection.
+
+* Puavo can easily handle tenthousend and more  users, desktops and laptops.
+
+* All Puavo clients on a patch cable can be transformed into a WiFi hotspot
+
+* The Puavo as a service provides the complete maintainance of the client software
+
+* The Puavo as a service provides the complete ltsp-pnp server with full care of the the server.
+
+This means Puavo adminstrators care only about the client setup. All the rest is handled by the Puavo software or by Puavo as a service.
+
+  
