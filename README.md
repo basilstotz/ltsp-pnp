@@ -93,9 +93,11 @@ Puavo is directly built on top of LTSP and adds some important features:
 
 * All Puavo clients on a patch cable can be transformed into a WiFi hotspot
 
-* The Puavo as a service provides the complete maintainance of the client software
+* Puavo as a service provides the complete maintainance of the client software
 
-* The Puavo as a service provides the complete ltsp-pnp server with full care of the the server.
+* Puavo as a service provides the complete ltsp-pnp server with full care of the the server.
+
+* Puavo as a service provides a daily backup off all system and user data. 
 
 This means Puavo adminstrators care only about the client setup. All the rest is handled by the Puavo software or by Puavo as a service.
 
