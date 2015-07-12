@@ -8,9 +8,9 @@ This setup asumes that you have a standard home network: You have a router, whic
 
 You might want to configure your router to serve a static address for the ltsp-pnp-server. It's allways a good idea, when servers have fix IP addresses,
 
-Plug the ltsp-pnp server and all clients in a normal switch with enough port for all your clients plus two port for ther server and the internet
+Plug the ltsp-pnp server and all clients in a normal 1 GBit/s switch with enough port for all your clients plus one extra port for the router.
 
-Internet is 'injected' by connecting this switch to your router.
+Connect the switch with your router.
 
 ## Server
 
