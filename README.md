@@ -2,13 +2,13 @@
 
 see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (german!) instructions. 
 
-## Introduction
+## Vanilla LTSP.
 
-Vanilla LTSP is suited for small orgnizations with a few (maybe max. 20) Users with the about the same amount of clients. 
+This guide shows how to install a vanilla Ubuntu LTSP server. Vanilla LTSP is suited for small orgnizations with a few (maybe max. 20) Users with the about the same amount of clients. 
 
 All clients have to be connected by a patchwork cable. It does not work over wifi. 
 
-## Info: LTSP and Puavo
+## Info: LTSP vs Puavo
 
 Puavo is directly built on top of LTSP and adds some important features:
 
@@ -16,11 +16,11 @@ Puavo is directly built on top of LTSP and adds some important features:
 
 * Puavo can easily handle tenthousend and more  users, desktops and laptops.
 
-* The Puavo service provides all programms, updates and upgrades automaticly
-
 * All Puavo clients on a patch cable can be transformed into a WiFi hotspot
 
-* Puavo service also includes the ltsp-pnp server with all hardware and software support.
+* The Puavo service provides the complete maintainance of the client software
+
+* The Puavo service provides the complete ltsp-pnp server with full care of the teh server.
 
  
 
