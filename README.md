@@ -6,13 +6,15 @@ see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (germ
 
 This setup asumes that you have a standard home network: You have a router, which provides internet and and a DHCP service? That's fine.
 
-The ltsp-pnp server and all clients can (and should) be in this network. Just plugin all into this network. 
-
 You might want to configure your router to serve a static address for the ltsp-pnp-server. It's allways a good idea, when servers have fix IP addresses,
+
+Plug the ltsp-pnp server and all clients in a normal switch with enough port for all your clients plus two port for ther server and the internet
+
+Internet is 'injected' by connecting this switch to your router.
 
 ## Server
 
-Any computer with bios can be used as server. It should have:
+Any computer with can run Ubuntu can be used as server. It should have:
 
 * An 1 gBit/s ethernet network interfce (nic)
 
@@ -35,7 +37,7 @@ Any computer with bios can be used as server. It should have:
 
 ## Client
 
-Any computer with bios can be used as client. It should have:
+Any computer with can run Ubuntu can be used as client. It should have:
 
 * An 1 gBit/s ethernet network interfce (nic). 100 MBit is ok. 
 
@@ -53,7 +55,7 @@ Any computer with bios can be used as client. It should have:
 
 * Start the client. 
 
-That's it. 
+That's it. Start working with the client.
 
 
 ### Client Maintenance
