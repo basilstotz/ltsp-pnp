@@ -8,7 +8,9 @@ Vanilla LTSP is suited for small orgnizations with a few (maybe max. 20) Users w
 
 All clients have to be connected by a patchwork cable. It does not work over wifi. 
 
-Puavo is build on top of LTSP and adds some important features:
+## Info: LTSP and Puavo
+
+Puavo is directly built on top of LTSP and adds some important features:
 
 * Puavo can handle laptops. These LTSP laptops also work over wlan or  even without an network connection.
 
