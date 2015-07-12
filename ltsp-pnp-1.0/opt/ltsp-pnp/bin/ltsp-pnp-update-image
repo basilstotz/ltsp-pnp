@@ -1,6 +1,14 @@
 #!/bin/bash
 
 # Skript muss in einer root-shell ausgeführt werden, indem man vorher sudo su ausführt
+if test $USER!="root"; then 
+   echo "error: not root!"
+   echo
+   echo "type: sudo $0"
+   echo
+   echo "Exiting...";
+   exit 1;
+fi
 
 # Erzeugen eines Autostarts für den Unity Panel Service
 echo '[Desktop Entry]
@@ -20,3 +28,4 @@ service nbd-server restart
 # Entfernen des Unity Panel Service, damit der LTSP-Server ohne Komplikationen neu starten kann
 rm /etc/xdg/autostart/unity-panel-service.desktop
 
+exit 0
