@@ -4,7 +4,9 @@ see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (germ
 
 ## Vanilla LTSP.
 
-This guide shows how to install a vanilla Ubuntu LTSP server. Vanilla LTSP is suited for small orgnizations with a few (maybe max. 20) Users with the about the same amount of clients. 
+This guide shows how to install a vanilla Ubuntu LTSP-PNP server. Vanilla LTSP-PNP is suited for small orgnizations with a few (maybe max. 20) Users with the about the same amount of clients. 
+
+The client are fat clients not thinclients. All pograms run on the clients.
 
 All clients have to be connected by a patchwork cable. It does not work over wifi. 
 
