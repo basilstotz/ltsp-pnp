@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=LTSP-PNP
-Comment="Clones this computer to an compressed image"
-Exec=gksu -u root -m "This command enables or updates LTSP-PNP services.\n\nLTSP-PNP services allow any number of the netboot clients, all being exact clones of this installation.\n\nRerun this anytime, when you want to propagate any changes you made on this installation to the LTSP clients.\n\nWhen the (new) clone is ready LSTP-PNP services (re-)start  using the latest clone."  "gnome-terminal -x sleep 10"
-Terminal=true
-Type=Application
-Icon=ltsp-update-image.png
-Categories=Application;System;
-Keywords=LTSP;System;Utility;
