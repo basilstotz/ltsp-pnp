@@ -43,8 +43,8 @@ case "$1" in
       dpkg -i ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
       rm ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
       mv /etc/ltsp/update-kernels.bak /etc/ltsp/update-kernels.conf
-      # Modifikation, um den Screen Lock zu ermöglichen
-      nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn 
+      # Modifikation, um den Screen Lock zu ermöglichen 
+      sed -i 's/^disable-lock-screen=true/#disable-lock-screen=true/g' /usr/share/ltsp/init-ltsp.d/50-gsettings-overrides      
 
       echo "set ldm background"
       # Ersetzt den Ubuntu LTSP-Loginscreen durch den Standard-Desktophintergrund

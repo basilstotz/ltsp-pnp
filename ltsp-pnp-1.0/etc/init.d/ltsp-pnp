@@ -1,0 +1,94 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          ltsp-pnp
+# Required-Start:    $local_fs $network $remote_fs $syslog
+# Required-Stop:     $local_fs $network $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <Enter a short description of the software>
+# Description:       <Enter a long description of the software>
+#                    <...>
+#                    <...>
+### END INIT INFO
+
+# Author: Basil Stotz <stotz@amxa.ch>
+
+#
+# Function that starts the daemon/service
+#
+do_start()
+{
+  if test -f /opt/ltsp/images/i386.img; then
+    if ! test -f /var/lock/ltsp-pnp.lock; then
+       service nbd-server start
+       service dnsmasq start
+       touch /var/lock/ltsp-pnp.lock
+    fi
+  fi 
+}
+
+#
+# Function that stops the daemon/service
+#
+do_stop()
+{
+  if test -f /var/lock/ltsp-pnp.lock; then
+    service nbd-server stop
+    service dnsmasq stop
+    rm /var/lock/ltsp-pnp.lock
+  fi
+}
+
+#
+# Function that sends a SIGHUP to the daemon/service
+#
+do_reload() {
+  do_stop
+  do_start
+}
+
+do_clone() {
+
+  # Erzeugen eines Autostarts für den Unity Panel Service
+  echo '[Desktop Entry]
+    Type=Application
+    Name=Unity Panel Service
+    Exec=/usr/lib/unity/unity-panel-service
+' >> /etc/xdg/autostart/unity-panel-service.desktop
+
+  mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
+
+  /usr/share/ltsp/update-kernels
+
+  ltsp-update-image --cleanup /
+
+  mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
+
+  rm /ext/xdg/autostart/unity-panel-service.desktop
+
+  service nbd-server restart
+
+}
+
+
+case "$1" in
+  start)
+        do_start
+	;;
+  stop)
+        do_stop
+	;;
+  clone)
+        do_clone
+	;;
+  restart|force-reload)
+        do_relaod
+	;;
+  *)
+	#echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+	exit 3
+	;;
+esac
+
+:
