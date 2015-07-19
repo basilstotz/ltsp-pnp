@@ -18,8 +18,8 @@
 #
 do_start()
 {
-  if test -f /opt/ltsp/images/i386.img; then
-    if ! test -f /var/lock/ltsp-pnp.lock; then
+  if test -e /opt/ltsp/images/i386.img; then
+    if ! test -e /var/lock/ltsp-pnp.lock; then
        service nbd-server start
        service dnsmasq start
        touch /var/lock/ltsp-pnp.lock
@@ -32,7 +32,7 @@ do_start()
 #
 do_stop()
 {
-  if test -f /var/lock/ltsp-pnp.lock; then
+  if test -e /var/lock/ltsp-pnp.lock; then
     service nbd-server stop
     service dnsmasq stop
     rm /var/lock/ltsp-pnp.lock
@@ -62,7 +62,7 @@ do_clone() {
 
   ltsp-update-image --cleanup /
 
-  echo "ltsp-clone-$(date)" >/etc/ltsp/this/image_name
+  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
 
@@ -113,7 +113,8 @@ do_init() {
         LDM_PASSWORD_HASH=True                                                                  
       ' >> /var/lib/tftpboot/ltsp/i386/lts.conf
 
-
+       #preset /etc/ltsp/this_image_name
+       echo -n "" > /etc/ltsp/this_image_name
 
     # never run again
     touch /etc/ltsp/initialized
@@ -144,7 +145,13 @@ do_upgrade() {
        fi
        if zsync -i $LOCAL $URL/$REMOTE.zsync; then
          echo "$REMOTE" >/etc/ltsp/this_image_name
-         rm i386.img
+         if test -e i386.img; then
+            if test -h i386.img; then
+                rm i386.img
+            else
+                mv i386.img i386.clone
+            fi
+         fi
          if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
          ln -s $REMOTE i386.img
        fi
