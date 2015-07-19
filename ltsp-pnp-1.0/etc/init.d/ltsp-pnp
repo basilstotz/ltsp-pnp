@@ -180,6 +180,7 @@ case "$1" in
         do_init
         do_upgrade $2
         do_reload
+        ;;
   init)
         do_init
         ;;
