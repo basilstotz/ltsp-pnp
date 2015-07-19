@@ -62,6 +62,8 @@ do_clone() {
 
   ltsp-update-image --cleanup /
 
+  echo "ltsp-clone-$(date)" >/etc/ltsp/this/image_name
+
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
 
   rm /ext/xdg/autostart/unity-panel-service.desktop
@@ -118,6 +120,40 @@ do_init() {
   fi
 }
 
+
+do_upgrade() {
+
+   LOCAL=$(cat /etc/ltsp/this_image_name)
+   REMOTE=$(wget $URL/current_image_name||echo $LOCAL)
+
+   if test -z "$2"; then
+      URL="http://www.amxa.ch/andrijn/images/"
+   else
+      URL=$2
+   fi
+
+   if ! test -f /var/lock/ltsp-pnp-upgrade.lock; then
+
+     touch /var/lock/ltsp-pnp-upgrade.lock
+
+     if test "$LOCAL"!="$REMOTE"; then
+       cd /opt/ltsp/images
+       if test -z "$LOCAL"; then
+         LOCAL=$REMOTE
+         touch $LOCAL
+       fi
+       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
+         echo "$REMOTE" >/etc/ltsp/this_image_name
+         rm i386.img
+         if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
+         ln -s $REMOTE i386.img
+       fi
+    fi
+
+    rm /var/lock/ltsp-pnp-upgrade.lock
+  fi
+}
+
 case "$1" in
   start)
         do_start
@@ -125,7 +161,7 @@ case "$1" in
   stop)
         do_stop
 	;;
-  restart|force-reload)
+  restart)
         do_relaod
 	;;
   clone)
@@ -133,12 +169,16 @@ case "$1" in
         do_clone
         do_reload
 	;;
+  upgrade)
+        do_init
+        do_upgrade $2
+        do_reload
   init)
         do_init
         ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
-	echo "Usage: $0 {start|stop|clone|init|restart|force-reload}" >&2
+	echo "Usage: $0 {start|stop|clone|upgrade|init|restart}" >&2
 	exit 3
 	;;
 esac
