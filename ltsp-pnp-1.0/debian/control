@@ -10,6 +10,6 @@ Homepage: <insert the upstream URL, if relevant>
 
 Package: ltsp-pnp
 Architecture: all
-Depends: ${misc:Depends},dnsmasq-base,ltsp-server,ltsp-client,ldm-ubuntu-theme
+Depends: ${misc:Depends},zsync,dnsmasq-base,ltsp-server,ltsp-client,ldm-ubuntu-theme
 Description: Install and manage ltsp-pnp system (on ubuntu 14.04)
  Install and manage ltsp-pnp system (on ubuntu 14.04)
