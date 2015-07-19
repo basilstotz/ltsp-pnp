@@ -20,56 +20,25 @@ set -e
 
 case "$1" in
     configure)
-      #echo "install dependencies..."
-      #apt-get --yes install dnsmasq ltsp-server ltsp-client ldm-ubuntu-theme
-      # config dnsmasq
-      echo "configuring dnsmasq..."
+      echo "configuring system..."
       ltsp-config dnsmasq
       # In Ubuntu 14.04 und höher muss dnsmasq auch als DNS fungieren
       sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
 
-      echo "stop and remove LTSP  services..."
-      service dnsmasq stop
-      update-rc.d -f dnsmask remove
-      service nbd-server stop
-      update-rc.d -f nbd-server remove
-
-
-
-      echo "fix screen lock"
-      # Damit der Screen Lock funktioniert, müssen ltsp-client-core und ldm aktualisiert werden
-      # Zuvor muss die Datei update-kernels.conf gesichert werden
-      cp /etc/ltsp/update-kernels.conf /etc/ltsp/update-kernels.bak
-      wget http://ftp.de.debian.org/debian/pool/main/l/ltsp/ltsp-client-core_5.5.4-4_i386.deb
-      wget http://ftp.de.debian.org/debian/pool/main/l/ldm/ldm_2.2.15-2_i386.deb
-      dpkg -i ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
-      rm ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
-      mv /etc/ltsp/update-kernels.bak /etc/ltsp/update-kernels.conf
-      # Modifikation, um den Screen Lock zu ermöglichen 
-      sed -i 's/^disable-lock-screen=true/#disable-lock-screen=true/g' /usr/share/ltsp/init-ltsp.d/50-gsettings-overrides      
-
-      echo "set ldm background"
-      # Ersetzt den Ubuntu LTSP-Loginscreen durch den Standard-Desktophintergrund
-      cp /usr/share/backgrounds/warty-final-ubuntu.png /usr/share/ldm/themes/ubuntu/bg.png
-
-      echo "patch update-kernels.conf"
+      # patch update-kernels.conf"
       # Kernelupdate im LTSP-Verzeichnis
       sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
       #???? /usr/share/ltsp/update-kernels
 
-
-      # Generieren der lts.conf
-      echo "generate lts.conf"
-      echo '[Default]
-        # Diese Services müssen auf den Clients deaktiviert werden, um Konflikte zu vermeiden
-        RM_SYSTEM_SERVICES="dnsmasq nbd-server ltsp-pnp"
-    
-        # Modifikation, um den Screen Lock zu ermöglichen
-        LDM_PASSWORD_HASH=True
-      ' >> /var/lib/tftpboot/ltsp/i386/lts.conf
+      echo "stop LTSP  services..."
+      service dnsmasq stop
+      update-rc.d -f dnsmasq remove
+      service nbd-server stop
+      update-rc.d -f nbd-server remove
 
       echo "installing and starting ltsp-pnp services"
-      update-rd.cd ltsp-pnp defaults
+      chmod u+x /etc/init.d/ltsp-pnp
+      update-rc.d ltsp-pnp defaults
       service ltsp-pnp start
       echo "done"
       echo

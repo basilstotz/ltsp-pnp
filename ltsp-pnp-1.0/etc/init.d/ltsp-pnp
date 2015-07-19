@@ -71,6 +71,43 @@ do_clone() {
 
 }
 
+do_init() {
+  if ! test -f /etc/ltsp/initialized; then
+
+
+      echo "fix screen lock"
+      # Damit der Screen Lock funktioniert, müssen ltsp-client-core und ldm aktualisiert werden
+      # Zuvor muss die Datei update-kernels.conf gesichert werden                               
+      cp /etc/ltsp/update-kernels.conf /etc/ltsp/update-kernels.bak
+      wget http://ftp.de.debian.org/debian/pool/main/l/ltsp/ltsp-client-core_5.5.4-4_i386.deb
+      wget http://ftp.de.debian.org/debian/pool/main/l/ldm/ldm_2.2.15-2_i386.deb
+      dpkg -i ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
+      rm ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
+      mv /etc/ltsp/update-kernels.bak /etc/ltsp/update-kernels.conf
+      # Modifikation, um den Screen Lock zu ermöglichen                  
+      sed -i 's/^disable-lock-screen=true/#disable-lock-screen=true/g' /usr/share/ltsp/init-ltsp.d/50-gsettings-overrides
+
+      echo "set ldm background"
+      # Ersetzt den Ubuntu LTSP-Loginscreen durch den Standard-Desktophintergrund               
+      cp /usr/share/backgrounds/warty-final-ubuntu.png /usr/share/ldm/themes/ubuntu/bg.png
+
+
+      # Generieren der lts.conf                                                                 
+      echo "generate lts.conf"
+      echo '[Default]                                                                           
+        # Diese Services müssen auf den Clients deaktiviert werden, um Konflikte zu vermeiden   
+        RM_SYSTEM_SERVICES="dnsmasq nbd-server ltsp-pnp"                                        
+                                                                                                
+        # Modifikation, um den Screen Lock zu ermöglichen                                       
+        LDM_PASSWORD_HASH=True                                                                  
+      ' >> /var/lib/tftpboot/ltsp/i386/lts.conf
+
+
+
+    # never run again
+    touch /etc/ltsp/initialized
+  fi
+}
 
 case "$1" in
   start)
@@ -79,16 +116,20 @@ case "$1" in
   stop)
         do_stop
 	;;
-  clone)
-        do_clone
-        do_reload
-	;;
   restart|force-reload)
         do_relaod
 	;;
+  clone)
+        do_init
+        do_clone
+        do_reload
+	;;
+  init)
+        do_init
+        ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
-	echo "Usage: $0 {start|stop|clone|restart|force-reload}" >&2
+	echo "Usage: $0 {start|stop|clone|init|restart|force-reload}" >&2
 	exit 3
 	;;
 esac
