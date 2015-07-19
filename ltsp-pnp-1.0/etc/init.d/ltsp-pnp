@@ -87,8 +87,8 @@ case "$1" in
         do_relaod
 	;;
   *)
-	#echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
-	echo "Usage: $SCRIPTNAME {start|stop|clone|restart|force-reload}" >&2
+	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $0 {start|stop|clone|restart|force-reload}" >&2
 	exit 3
 	;;
 esac
