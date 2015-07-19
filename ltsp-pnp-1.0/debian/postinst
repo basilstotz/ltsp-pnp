@@ -20,8 +20,8 @@ set -e
 
 case "$1" in
     configure)
-      echo "install dependencies..."
-      apt-get --yes install dnsmasq ltsp-server ltsp-clinet ldm-ubuntu-theme
+      #echo "install dependencies..."
+      #apt-get --yes install dnsmasq ltsp-server ltsp-client ldm-ubuntu-theme
       # config dnsmasq
       echo "configuring dnsmasq..."
       ltsp-config dnsmasq
