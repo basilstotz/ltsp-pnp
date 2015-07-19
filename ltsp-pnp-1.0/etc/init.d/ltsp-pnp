@@ -21,7 +21,7 @@ do_start()
   if test -e /opt/ltsp/images/i386.img; then
     if ! test -e /var/lock/ltsp-pnp.lock; then
        service nbd-server start
-       service dnsmasq start
+#       service dnsmasq start
        touch /var/lock/ltsp-pnp.lock
     fi
   fi 
@@ -34,7 +34,7 @@ do_stop()
 {
   if test -e /var/lock/ltsp-pnp.lock; then
     service nbd-server stop
-    service dnsmasq stop
+#    service dnsmasq stop
     rm /var/lock/ltsp-pnp.lock
   fi
 }
