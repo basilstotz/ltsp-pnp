@@ -66,9 +66,8 @@ do_clone() {
 
   rm /ext/xdg/autostart/unity-panel-service.desktop
 
-  service nbd-server restart
-
-  do_start
+#  service nbd-server restart
+#  do_start
 
 }
 
@@ -82,6 +81,7 @@ case "$1" in
 	;;
   clone)
         do_clone
+        do_reload
 	;;
   restart|force-reload)
         do_relaod
