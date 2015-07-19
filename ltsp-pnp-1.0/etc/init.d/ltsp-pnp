@@ -83,9 +83,7 @@ do_init() {
       sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
 
       # patch update-kernels.conf"                                                              
-      # Kernelupdate im LTSP-Verzeichnis                                                        
-      sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
-      #???? /usr/share/ltsp/update-kernels                                                      
+      # Kernelupdate im LTSP-Verzeichnis                                                       
 
       echo "fix screen lock"
       # Damit der Screen Lock funktioniert, müssen ltsp-client-core und ldm aktualisiert werden
@@ -98,6 +96,12 @@ do_init() {
       mv /etc/ltsp/update-kernels.bak /etc/ltsp/update-kernels.conf
       # Modifikation, um den Screen Lock zu ermöglichen                  
       sed -i 's/^disable-lock-screen=true/#disable-lock-screen=true/g' /usr/share/ltsp/init-ltsp.d/50-gsettings-overrides
+
+
+ 
+      sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
+      #???? /usr/share/ltsp/update-kernels                                                      
+
 
       echo "set ldm background"
       # Ersetzt den Ubuntu LTSP-Loginscreen durch den Standard-Desktophintergrund               
