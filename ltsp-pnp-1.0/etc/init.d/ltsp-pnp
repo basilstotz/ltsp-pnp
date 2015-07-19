@@ -74,6 +74,15 @@ do_clone() {
 do_init() {
   if ! test -f /etc/ltsp/initialized; then
 
+      echo "configuring system..."
+      ltsp-config dnsmasq
+      # In Ubuntu 14.04 und höher muss dnsmasq auch als DNS fungieren                           
+      sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
+
+      # patch update-kernels.conf"                                                              
+      # Kernelupdate im LTSP-Verzeichnis                                                        
+      sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
+      #???? /usr/share/ltsp/update-kernels                                                      
 
       echo "fix screen lock"
       # Damit der Screen Lock funktioniert, müssen ltsp-client-core und ldm aktualisiert werden

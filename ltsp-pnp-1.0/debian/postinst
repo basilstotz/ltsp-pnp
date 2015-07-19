@@ -20,26 +20,16 @@ set -e
 
 case "$1" in
     configure)
-      echo "configuring system..."
-      ltsp-config dnsmasq
-      # In Ubuntu 14.04 und höher muss dnsmasq auch als DNS fungieren
-      sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
-
-      # patch update-kernels.conf"
-      # Kernelupdate im LTSP-Verzeichnis
-      sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
-      #???? /usr/share/ltsp/update-kernels
-
-      echo "stop LTSP  services..."
+      echo "prepare LTSP backend services"
       service dnsmasq stop
       update-rc.d -f dnsmasq remove
       service nbd-server stop
       update-rc.d -f nbd-server remove
-
       echo "installing and starting ltsp-pnp services"
       chmod u+x /etc/init.d/ltsp-pnp
       update-rc.d ltsp-pnp defaults
       service ltsp-pnp start
+      echo
       echo "done"
       echo
     ;;
