@@ -125,13 +125,13 @@ do_init() {
 do_upgrade() {
 
    LOCAL=$(cat /etc/ltsp/this_image_name)
-   REMOTE=$(wget $URL/current_image_name||echo $LOCAL)
 
    if test -z "$2"; then
       URL="http://www.amxa.ch/andrijn/images/"
    else
       URL=$2
    fi
+   REMOTE=$(wget $URL/current_image_name -O - 2>/dev/null||echo $LOCAL)
 
    if ! test -f /var/lock/ltsp-pnp-upgrade.lock; then
 
