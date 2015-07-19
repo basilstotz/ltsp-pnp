@@ -23,8 +23,8 @@ case "$1" in
       echo "prepare LTSP backend services"
 #      service dnsmasq stop
 #      update-rc.d -f dnsmasq remove
-      service tftpd-hpa stop
-      update-rc.d -f tftpd-hpa remove
+#      service tftpd-hpa stop || true
+#      update-rc.d -f tftpd-hpa remove || true
       service nbd-server stop
       update-rc.d -f nbd-server remove
       echo "installing and starting ltsp-pnp services"
