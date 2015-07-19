@@ -21,8 +21,8 @@ set -e
 case "$1" in
     configure)
       echo "prepare LTSP backend services"
-      service dnsmasq stop
-      update-rc.d -f dnsmasq remove
+#      service dnsmasq stop
+#      update-rc.d -f dnsmasq remove
       service nbd-server stop
       update-rc.d -f nbd-server remove
       echo "installing and starting ltsp-pnp services"
