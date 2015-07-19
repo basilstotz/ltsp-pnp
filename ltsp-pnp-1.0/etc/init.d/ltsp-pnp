@@ -126,10 +126,10 @@ do_upgrade() {
 
    LOCAL=$(cat /etc/ltsp/this_image_name)
 
-   if test -z "$2"; then
+   if test -z "$1"; then
       URL="http://www.amxa.ch/andrijn/images/"
    else
-      URL=$2
+      URL=$1
    fi
    REMOTE=$(wget $URL/current_image_name -O - 2>/dev/null||echo $LOCAL)
 
