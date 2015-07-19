@@ -153,7 +153,8 @@ do_upgrade() {
          LOCAL=$REMOTE
          touch $LOCAL
        fi
-       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
+#       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
+       if wget $URL/$REMOTE; then
          echo "$REMOTE" >/etc/ltsp/this_image_name
          if test -e i386.img; then
             if test -h i386.img; then
