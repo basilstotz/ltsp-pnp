@@ -180,7 +180,7 @@ case "$1" in
         do_stop
 	;;
   restart)
-        do_relaod
+        do_reload
 	;;
   clone)
         do_init
