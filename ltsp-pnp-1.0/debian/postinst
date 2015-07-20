@@ -21,8 +21,8 @@ set -e
 case "$1" in
     configure)
       echo "prepare LTSP backend services"
-#      service dnsmasq stop
-#      update-rc.d -f dnsmasq remove
+      service dnsmasq stop
+      update-rc.d -f dnsmasq remove
 #      service tftpd-hpa stop || true
 #      update-rc.d -f tftpd-hpa remove || true
       service nbd-server stop
