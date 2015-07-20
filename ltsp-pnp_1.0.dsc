@@ -10,8 +10,8 @@ Build-Depends: debhelper (>= 8.0.0)
 Package-List: 
  ltsp-pnp deb unknown optional
 Checksums-Sha1: 
- a11f95daa4332316d9c6451501dd3595e9185db1 22672 ltsp-pnp_1.0.tar.gz
+ e4d16f6d99f8534dda74cdbb52f9e6b331078a67 22867 ltsp-pnp_1.0.tar.gz
 Checksums-Sha256: 
- db2d15642f1b37f17f9dfd400aa855e0fe0b808daa2c13f0e95d44ea75fb44df 22672 ltsp-pnp_1.0.tar.gz
+ 8ad26f933d33dbb0b6461533224bc0f60197e76e6676baea1204e0f2a2034568 22867 ltsp-pnp_1.0.tar.gz
 Files: 
- d5a61ecdda32a438a6d1640eba8effe3 22672 ltsp-pnp_1.0.tar.gz
+ de58bb2a954810a01292a5492be93ff9 22867 ltsp-pnp_1.0.tar.gz

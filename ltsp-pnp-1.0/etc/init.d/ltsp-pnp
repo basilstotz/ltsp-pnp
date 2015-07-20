@@ -183,11 +183,14 @@ do_upgrade() {
 }
 
 do_status(){
-
-  if test -e /var/lock/ltsp.pnp.lock; then
-     echo "running..."
+  if test -e /opt/ltsp/images/$(dpkg --print-archtecture).img; then
+    if test -e /var/lock/ltsp.pnp.lock; then
+       echo "the services are running"
+    else
+       echo "the image is here, but the services are stopped"
+    fi
   else
-     echo "stopped"
+    echo "no image found. run \"sudo service ltsp-pnp clone\"  to generate one."
   fi
 }
 
