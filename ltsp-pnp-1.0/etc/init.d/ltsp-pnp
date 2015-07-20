@@ -82,6 +82,8 @@ do_init() {
       # In Ubuntu 14.04 und höher muss dnsmasq auch als DNS fungieren                           
       sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
 
+      service dnsmasq restart
+
       # patch update-kernels.conf"                                                              
       # Kernelupdate im LTSP-Verzeichnis                                                       
 
@@ -107,13 +109,14 @@ do_init() {
       # Ersetzt den Ubuntu LTSP-Loginscreen durch den Standard-Desktophintergrund               
       cp /usr/share/backgrounds/warty-final-ubuntu.png /usr/share/ldm/themes/ubuntu/bg.png
 
-
       # Generieren der lts.conf                                                                
 
       if ! test -d /opt/ltsp/images/; then mkdir -p /opt/ltsp/images/;fi
       if ! test -d /var/lib/tftpboot/ltsp/i386; then mkdir -p /var/lib/tftpboot/ltsp/i386;fi
 
- 
+      /usr/share/ltsp/ltsp-update-kernels 
+      touch /etc/ltsp/initialized
+
       echo "generate lts.conf"
       echo '[Default]                                                                           
         # Diese Services müssen auf den Clients deaktiviert werden, um Konflikte zu vermeiden   
@@ -134,6 +137,7 @@ do_init() {
 
 do_upgrade() {
 
+   ARC=$(dpkg --print-architecture)
    LOCAL=$(cat /etc/ltsp/this_image_name)
 
    if test -z "$1"; then
@@ -156,15 +160,15 @@ do_upgrade() {
        if zsync -i $LOCAL $URL/$REMOTE.zsync; then
 #       if wget $URL/$REMOTE; then
          echo "$REMOTE" >/etc/ltsp/this_image_name
-         if test -e i386.img; then
-            if test -h i386.img; then
-                rm i386.img
+         if test -e $ARC.img; then
+            if test -h $ARC.img; then
+                rm $ARC.img
             else
-                mv i386.img i386.clone
+                mv $ARC.img $ARC.clone
             fi
          fi
          if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
-         ln -s $REMOTE i386.img
+         ln -s $REMOTE $ARC.img
        fi
     fi
 
