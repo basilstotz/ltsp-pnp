@@ -181,7 +181,7 @@ do_upgrade() {
 
 do_status(){
   if test -e /opt/ltsp/images/$(dpkg --print-architecture).img; then
-    if test -e /var/lock/ltsp.pnp.lock; then
+    if test -e /var/lock/ltsp-pnp.lock; then
        echo "the services are running"
     else
        echo "the image is here, but the services are stopped"
