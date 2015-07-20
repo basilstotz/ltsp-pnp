@@ -182,7 +182,14 @@ do_upgrade() {
   fi
 }
 
+do_status(){
 
+  if test -e /var/lock/ltsp.pnp.lock; then
+     echo "running..."
+  else
+     echo "stopped"
+  fi
+}
 
 case "$1" in
   start)
@@ -204,12 +211,15 @@ case "$1" in
         do_upgrade $2
         do_reload
         ;;
+  status)
+        do_status
+        ;;
   init)
         do_init
         ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
-	echo "Usage: $0 {start|stop|clone|upgrade|init|restart}" >&2
+	echo "Usage: $0 {status|start|stop|clone|upgrade|init|restart}" >&2
 	exit 3
 	;;
 esac
