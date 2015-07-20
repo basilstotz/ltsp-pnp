@@ -35,7 +35,7 @@ do_stop()
 #  if test -e /var/lock/ltsp-pnp.lock; then
     service nbd-server stop
     service dnsmasq stop
-    rm /var/lock/ltsp-pnp.lock
+    if test -e /var/lock/ltsp-pnp.lock;then rm /var/lock/ltsp-pnp.lock;fi
 #  fi
 }
 
