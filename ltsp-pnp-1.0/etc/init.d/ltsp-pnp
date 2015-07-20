@@ -133,7 +133,7 @@ do_init() {
       ' >> /var/lib/tftpboot/ltsp/i386/lts.conf
 
        #preset /etc/ltsp/this_image_name
-       echo -n "none" > /etc/ltsp/this_image_name
+       echo -n "none.img" > /etc/ltsp/this_image_name
 
     # never run again
     touch /etc/ltsp/initialized
@@ -159,7 +159,7 @@ do_upgrade() {
 
      if test "$LOCAL"!="$REMOTE"; then
        cd /opt/ltsp/images
-       if ! test -e $LOCAL;then touch $LOCAL.img;fi
+       if ! test -e $LOCAL;then touch $LOCAL;fi
        if zsync -i $LOCAL $URL/$REMOTE.zsync; then
 #       if wget $URL/$REMOTE; then
          echo "$REMOTE" >/etc/ltsp/this_image_name
