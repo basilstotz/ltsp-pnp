@@ -179,6 +179,17 @@ do_upgrade() {
   fi
 }
 
+
+
+do_build(){
+
+  ltsp-build-client
+
+
+}
+
+
+
 do_status(){
   if test -e /opt/ltsp/images/$(dpkg --print-architecture).img; then
     if test -e /var/lock/ltsp-pnp.lock; then
@@ -216,6 +227,10 @@ case "$1" in
         ;;
   init)
         do_init
+        ;;
+  build)
+        do_build
+        do_reload
         ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
