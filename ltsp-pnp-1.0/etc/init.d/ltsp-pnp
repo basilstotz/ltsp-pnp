@@ -32,11 +32,11 @@ do_start()
 #
 do_stop()
 {
-  if test -e /var/lock/ltsp-pnp.lock; then
+#  if test -e /var/lock/ltsp-pnp.lock; then
     service nbd-server stop
     service dnsmasq stop
     rm /var/lock/ltsp-pnp.lock
-  fi
+#  fi
 }
 
 #
@@ -121,7 +121,7 @@ do_init() {
       if ! test -d /var/lib/tftpboot/ltsp/i386; then mkdir -p /var/lib/tftpboot/ltsp/i386;fi
 
       ltsp-update-kernels 
-      touch /etc/ltsp/initialized
+
 
       echo "generate lts.conf"
       echo '[Default]                                                                           
