@@ -183,7 +183,7 @@ do_upgrade() {
 
 do_build(){
 
-  ltsp-build-client
+  ltsp-build-client --arch $(dpkg --print-architecture)
 
 
 }
@@ -217,7 +217,7 @@ case "$1" in
         do_clone
         do_reload
 	;;
-  upgrade)
+  zsync)
         do_init
         do_upgrade $2
         do_reload
@@ -229,12 +229,13 @@ case "$1" in
         do_init
         ;;
   build)
+        do_init
         do_build
         do_reload
         ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
-	echo "Usage: $0 {status|start|stop|clone|upgrade|init|restart}" >&2
+	echo "Usage: $0 {status|start|stop|clone|zsync|init|restart}" >&2
 	exit 3
 	;;
 esac
