@@ -159,10 +159,7 @@ do_upgrade() {
 
      if test "$LOCAL"!="$REMOTE"; then
        cd /opt/ltsp/images
-       if test -z "$LOCAL"; then
-         LOCAL=$REMOTE
-         touch $LOCAL
-       fi
+       if ! test -e $LOCAL;then touch $LOCAL.img;fi
        if zsync -i $LOCAL $URL/$REMOTE.zsync; then
 #       if wget $URL/$REMOTE; then
          echo "$REMOTE" >/etc/ltsp/this_image_name
