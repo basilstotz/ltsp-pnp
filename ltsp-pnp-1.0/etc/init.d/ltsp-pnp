@@ -18,7 +18,7 @@
 #
 do_start()
 {
-  if test -e /opt/ltsp/images/i386.img; then
+  if test -e /opt/ltsp/images/$(dpkg --print-architecture).img; then
     if ! test -e /var/lock/ltsp-pnp.lock; then
        service nbd-server start
        service dnsmasq start
