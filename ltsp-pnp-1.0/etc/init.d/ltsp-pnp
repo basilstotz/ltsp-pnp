@@ -191,6 +191,10 @@ do_build(){
 
 
 do_status(){
+  echo "current images"
+  ls -lh /opt/ltsp/images/*.img
+  ls -lh /opt/ltsp/images/*.img.clone
+  echo 
   if test -e /opt/ltsp/images/$(dpkg --print-architecture).img; then
     if test -e /var/lock/ltsp-pnp.lock; then
        echo "the services are running"
