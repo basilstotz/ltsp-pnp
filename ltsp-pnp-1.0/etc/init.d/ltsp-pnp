@@ -133,7 +133,7 @@ do_init() {
       ' >> /var/lib/tftpboot/ltsp/i386/lts.conf
 
        #preset /etc/ltsp/this_image_name
-       echo -n "" > /etc/ltsp/this_image_name
+       echo -n "none" > /etc/ltsp/this_image_name
 
     # never run again
     touch /etc/ltsp/initialized
@@ -181,6 +181,8 @@ do_upgrade() {
     rm /var/lock/ltsp-pnp-upgrade.lock
   fi
 }
+
+
 
 case "$1" in
   start)
