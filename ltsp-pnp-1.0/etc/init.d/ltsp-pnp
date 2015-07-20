@@ -137,7 +137,7 @@ do_upgrade() {
    LOCAL=$(cat /etc/ltsp/this_image_name)
 
    if test -z "$1"; then
-      URL="http://www.amxa.ch/andrijn/images/"
+      URL="http://www.amxa.ch/andrijn/images"
    else
       URL=$1
    fi
@@ -153,8 +153,8 @@ do_upgrade() {
          LOCAL=$REMOTE
          touch $LOCAL
        fi
-#       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
-       if wget $URL/$REMOTE; then
+       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
+#       if wget $URL/$REMOTE; then
          echo "$REMOTE" >/etc/ltsp/this_image_name
          if test -e i386.img; then
             if test -h i386.img; then
