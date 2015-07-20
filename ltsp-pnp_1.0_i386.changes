@@ -15,14 +15,14 @@ Changes:
  .
    * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
 Checksums-Sha1: 
- 6a3394d0efd70dbd019fd43cf3f869530b42c439 537 ltsp-pnp_1.0.dsc
- 114f6ce1734a57a1aa10922041940652ad7fba54 23881 ltsp-pnp_1.0.tar.gz
- 3d3ebd193f4dbabed7b0fe86b9da0ba803ef9a6a 15408 ltsp-pnp_1.0_all.deb
+ a9d9ed8ccc8d95067002964510cfc594abe27911 537 ltsp-pnp_1.0.dsc
+ 534a30d7c347dd121c50e8ddcc2cf933ba09709b 23842 ltsp-pnp_1.0.tar.gz
+ 3587ab986f05745d286c72d24edbac3d20c855b4 15408 ltsp-pnp_1.0_all.deb
 Checksums-Sha256: 
- 48c87b068e0df27077c0d52392df536843c8594ec06a4f717824951cdef05c2d 537 ltsp-pnp_1.0.dsc
- 654539ca611acef667d74b9038c248b821c55eb574248190eec306703a9ce698 23881 ltsp-pnp_1.0.tar.gz
- 3bb2a1a69e5400685ebafaa6dda197f83b1b70155b6781de6bd5a049bdd17c9d 15408 ltsp-pnp_1.0_all.deb
+ fb5431ab26184aa343d3eb41a03607e9a24dae7d9e22c6ebaad1be70252530bc 537 ltsp-pnp_1.0.dsc
+ 4d689b29f14b8d9ca5e87996e93c1b196b914760c25c10d83ae100bebd4e6108 23842 ltsp-pnp_1.0.tar.gz
+ 8676cf463e365eded00de09c67f60a34b3c6f3ebd53d386c446dcebb275fb094 15408 ltsp-pnp_1.0_all.deb
 Files: 
- 39e78d9161450bb56f3aff2a8b8f6094 537 unknown optional ltsp-pnp_1.0.dsc
- 699e7158a7c00a202dde3a16d9493f51 23881 unknown optional ltsp-pnp_1.0.tar.gz
- 728b51799545f813fd55d3cbb6dd5030 15408 unknown optional ltsp-pnp_1.0_all.deb
+ 7f45e0ad7ff3f9286e3a4deb9a1afdfc 537 unknown optional ltsp-pnp_1.0.dsc
+ c10091e6081a6a8fba7abebfc0f8d7ff 23842 unknown optional ltsp-pnp_1.0.tar.gz
+ 4e4c3677223d9bb54b7ad8bb03e18351 15408 unknown optional ltsp-pnp_1.0_all.deb
