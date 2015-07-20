@@ -58,12 +58,13 @@ do_clone() {
 
   mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
 
-  /usr/share/ltsp/update-kernels
+  ltsp-update-kernels
   ltsp-update-sshkeys
+
+  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
   ltsp-update-image --cleanup /
 
-  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
 
@@ -119,7 +120,7 @@ do_init() {
       if ! test -d /opt/ltsp/images/; then mkdir -p /opt/ltsp/images/;fi
       if ! test -d /var/lib/tftpboot/ltsp/i386; then mkdir -p /var/lib/tftpboot/ltsp/i386;fi
 
-      /usr/share/ltsp/ltsp-update-kernels 
+      ltsp-update-kernels 
       touch /etc/ltsp/initialized
 
       echo "generate lts.conf"
