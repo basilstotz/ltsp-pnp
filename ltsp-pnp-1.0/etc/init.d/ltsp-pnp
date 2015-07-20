@@ -78,7 +78,7 @@ do_init() {
   if ! test -f /etc/ltsp/initialized; then
 
       echo "configuring system..."
-      ltsp-config dnsmasq
+      ltsp-config -o dnsmasq
       # In Ubuntu 14.04 und höher muss dnsmasq auch als DNS fungieren                           
       sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
 
