@@ -212,6 +212,12 @@ case "$1" in
   restart)
         do_reload
 	;;
+  status)
+        do_status
+        ;;
+  init)
+        do_init
+        ;;
   clone)
         do_init
         do_clone
@@ -222,12 +228,6 @@ case "$1" in
         do_upgrade $2
         do_reload
         ;;
-  status)
-        do_status
-        ;;
-  init)
-        do_init
-        ;;
   build)
         do_init
         do_build
@@ -235,7 +235,7 @@ case "$1" in
         ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
-	echo "Usage: $0 {status|start|stop|clone|zsync|init|restart}" >&2
+	echo "Usage: $0 {status|start|stop|restart|init|build|clone|zsync}" >&2
 	exit 3
 	;;
 esac
