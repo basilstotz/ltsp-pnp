@@ -78,10 +78,12 @@ do_clone() {
 do_init() {
   if ! test -f /etc/ltsp/initialized; then
   
-      echo "upgrading LTSP installation..."
-      add-apt-repository --yes ppa:ts.sch.gr
-      apt-get --yes update
-      apt-get --yes upgrade
+      if ! test -e /etc/apt/sources.list.d/ts_sch_gr-ppa-trusty.list; then
+         echo "upgrading LTSP installation..."
+         add-apt-repository --yes ppa:ts.sch.gr
+         apt-get --yes update
+         apt-get --yes upgrade
+      fi    
 
       echo "configuring system..."
       ltsp-config -o dnsmasq
