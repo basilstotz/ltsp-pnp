@@ -58,7 +58,7 @@ do_clone() {
 
   mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
 
-  if ! test  -e /boot/vmlinuz*; then
+  if ls /boot|grep -q -v "initrd*"; then
     if test -d /cdrom/casper; then
       echo "copiing kernels from cdrom" 
       cp /cdrom/casper/vmlinuz.efi /boot/vmlinuz
