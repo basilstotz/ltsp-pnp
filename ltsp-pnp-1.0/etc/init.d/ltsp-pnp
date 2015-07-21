@@ -186,7 +186,7 @@ do_upgrade() {
 do_build(){
 
   ltsp-build-client --arch $(dpkg --print-architecture)
-
+  ltsp-update-image $(dpkg --print-architecture)
 
 }
 
