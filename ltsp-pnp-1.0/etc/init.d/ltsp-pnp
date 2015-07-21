@@ -67,7 +67,7 @@ do_clone() {
     if test -d /cdrom; then
       echo "copiing kernels from cdrom" 
       cp /cdrom/casper/vmlinuz.efi /boot/vmlinuz
-      cp /cdrom/casper/initrd.lz /boot/initrd
+      cp /cdrom/casper/initrd.lz /boot/initrd.img
     fi
   fi
 
