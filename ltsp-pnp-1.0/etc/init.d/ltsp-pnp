@@ -142,7 +142,7 @@ do_init() {
                                                                                                 
         # Modifikation, um den Screen Lock zu ermöglichen                                       
         LDM_PASSWORD_HASH=True                                                                  
-      ' >> /var/lib/tftpboot/ltsp/i386/lts.conf
+      ' >> /var/lib/tftpboot/ltsp/$(dpkg --print-architecture)/lts.conf
 
        #preset /etc/ltsp/this_image_name
        echo -n "none.img" > /etc/ltsp/this_image_name
