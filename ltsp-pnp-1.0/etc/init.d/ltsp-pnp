@@ -58,11 +58,6 @@ do_clone() {
 
   mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
 
-  ltsp-update-kernels
-  ltsp-update-sshkeys
-
-  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
-
   if ! test  -e /boot/vmlinuz; then
     if test -d /cdrom; then
       echo "copiing kernels from cdrom" 
@@ -70,6 +65,13 @@ do_clone() {
       cp /cdrom/casper/initrd.lz /boot/initrd.img
     fi
   fi
+
+
+  ltsp-update-kernels
+  ltsp-update-sshkeys
+
+  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
+
 
   ltsp-update-image --cleanup /
 
