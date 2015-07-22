@@ -9,13 +9,11 @@ help:
 	@echo "   ${TARGETS}" | fmt
 
 init:
-	@./init.sh ${NAME}
+	@./bin/init.sh ${NAME}
 
 clean:
-	@./clean.sh ${NAME}
+	@./bin/clean.sh ${NAME}
 
 build:
-	@./build.sh ${NAME}
+	@./bin/build.sh ${NAME}
 
-publish:
-	@./publish.sh ${NAME}
