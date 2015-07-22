@@ -13,12 +13,19 @@
 
 # Author: Basil Stotz <stotz@amxa.ch>
 
+ARC=$(dpkg --print-architecture)
+
+update_link(){
+  if test -e $ARC.img; then rm $ARC.img;fi
+  ln -s $1 $ARC.img
+}
+
 #
 # Function that starts the daemon/service
 #
 do_start()
 {
-  if test -e /opt/ltsp/images/$(dpkg --print-architecture).img; then
+  if test -e /opt/ltsp/images/$ARC.img; then
     if ! test -e /var/lock/ltsp-pnp.lock; then
        service nbd-server start
        service dnsmasq start
@@ -50,36 +57,38 @@ do_reload() {
 do_clone() {
 
   # Erzeugen eines Autostarts für den Unity Panel Service
-  echo '[Desktop Entry]
-    Type=Application
-    Name=Unity Panel Service
-    Exec=/usr/lib/unity/unity-panel-service
-' >> /etc/xdg/autostart/unity-panel-service.desktop
-    rm  /etc/xdg/autostart/unity-panel-service.desktop
+#  echo '[Desktop Entry]
+#    Type=Application
+#    Name=Unity Panel Service
+#    Exec=/usr/lib/unity/unity-panel-service
+#' >> /etc/xdg/autostart/unity-panel-service.desktop
+#    rm  /etc/xdg/autostart/unity-panel-service.desktop
 
   mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
 
-  if ls /boot|grep -q -v "initrd*"; then
-    if test -d /cdrom/casper; then
-      echo "copiing kernels from cdrom" 
-      cp /cdrom/casper/vmlinuz.efi /boot/vmlinuz
-      cp /cdrom/casper/initrd.lz /boot/initrd.img
-    fi
-  fi
+#  if ls /boot|grep -q -v "initrd*"; then
+#    if test -d /cdrom/casper; then
+#      echo "copiing kernels from cdrom" 
+#      cp /cdrom/casper/vmlinuz.efi /boot/vmlinuz
+#      cp /cdrom/casper/initrd.lz /boot/initrd.img
+#    fi
+#  fi
 
 
   ltsp-update-kernels
   ltsp-update-sshkeys
 
-  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
+#  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
 
-  ltsp-update-image --cleanup /
+  if ltsp-update-image --chroot clone-$ARC --cleanup / ; then
+     update_link clone-$ARC.img
+  fi
 
 
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
 
-  rm /etc/xdg/autostart/unity-panel-service.desktop
+#  rm /etc/xdg/autostart/unity-panel-service.desktop
 
 #  service nbd-server restart
 #  do_start
@@ -131,7 +140,7 @@ do_init() {
       # Generieren der lts.conf                                                                
 
       if ! test -d /opt/ltsp/images/; then mkdir -p /opt/ltsp/images/;fi
-      if ! test -d /var/lib/tftpboot/ltsp/$(dpkg --print-architecture); then mkdir -p /var/lib/tftpboot/ltsp/$(dpkg --print-architecture);fi
+      if ! test -d /var/lib/tftpboot/ltsp/$ARC; then mkdir -p /var/lib/tftpboot/ltsp/$ARC;fi
 
       ltsp-update-kernels 
 
@@ -143,7 +152,7 @@ do_init() {
                                                                                                 
         # Modifikation, um den Screen Lock zu ermöglichen                                       
         LDM_PASSWORD_HASH=True                                                                  
-      ' >> /var/lib/tftpboot/ltsp/$(dpkg --print-architecture)/lts.conf
+      ' >> /var/lib/tftpboot/ltsp/$ARC/lts.conf
 
        #preset /etc/ltsp/this_image_name
        echo -n "none.img" > /etc/ltsp/this_image_name
@@ -154,39 +163,42 @@ do_init() {
 }
 
 
-do_upgrade() {
+do_zsync() {
 
-   ARC=$(dpkg --print-architecture)
-   LOCAL=$(cat /etc/ltsp/this_image_name)
+#   LOCAL=$(cat /etc/ltsp/this_image_name)
 
-   if test -z "$1"; then
-      URL="http://www.amxa.ch/andrijn/images"
-   else
-      URL=$1
-   fi
-   REMOTE=$(wget $URL/current_image_name -O - 2>/dev/null||echo $LOCAL)
+    IMAGE="standard"
+#   if test -z "$1"; then
+    URL="http://images.amxa.ch"
+#   else
+#      URL=$1
+#   fi
+#   REMOTE=$(wget $URL/current_image_name -O - 2>/dev/null||echo $LOCAL)
 
    if ! test -f /var/lock/ltsp-pnp-upgrade.lock; then
 
      touch /var/lock/ltsp-pnp-upgrade.lock
 
-     if test "$LOCAL"!="$REMOTE"; then
-       cd /opt/ltsp/images
-       if ! test -e $LOCAL;then touch $LOCAL;fi
-       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
-#       if wget $URL/$REMOTE; then
-         echo "$REMOTE" >/etc/ltsp/this_image_name
-         if test -e $ARC.img; then
-            if test -h $ARC.img; then
-                rm $ARC.img
-            else
-                mv $ARC.img $ARC.clone
-            fi
-         fi
-         if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
-         ln -s $REMOTE $ARC.img
-       fi
-    fi
+      if zsync $URL/$IMAGE-$ARC.img.zsync; then
+         update_link $IMAGE-$ARC.img
+      fi        
+
+#     if test "$LOCAL"!="$REMOTE"; then
+#       cd /opt/ltsp/images
+#       if ! test -e $LOCAL;then touch $LOCAL;fi
+#       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
+#         echo "$REMOTE" >/etc/ltsp/this_image_name
+#         if test -e $ARC.img; then
+#            if test -h $ARC.img; then
+#                rm $ARC.img
+#            else
+#                mv $ARC.img $ARC.clone
+#            fi
+#         fi
+#         if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
+#         ln -s $REMOTE $ARC.img
+#       fi
+#    fi
 
     rm /var/lock/ltsp-pnp-upgrade.lock
   fi
@@ -196,9 +208,11 @@ do_upgrade() {
 
 do_build(){
 
-  ltsp-build-client --arch $(dpkg --print-architecture)
-  ltsp-update-image $(dpkg --print-architecture)
-
+  if ltsp-build-client --chroot build-$ARC; then
+      if ltsp-update-image --chroot build-$ARC; then
+         update_link build-$ARC.img 
+      fi
+  fi
 }
 
 
@@ -206,9 +220,8 @@ do_build(){
 do_status(){
   echo "current images"
   ls -lh /opt/ltsp/images/*.img
-  ls -lh /opt/ltsp/images/*.img.clone
   echo 
-  if test -e /opt/ltsp/images/$(dpkg --print-architecture).img; then
+  if test -e /opt/ltsp/images/$ARC.img; then
     if test -e /var/lock/ltsp-pnp.lock; then
        echo "the services are running"
     else
@@ -242,7 +255,7 @@ case "$1" in
 	;;
   zsync)
         do_init
-        do_upgrade $2
+        do_upgrade 
         do_reload
         ;;
   build)
