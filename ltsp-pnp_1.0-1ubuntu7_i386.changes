@@ -1,0 +1,34 @@
+Format: 1.8
+Date: Wed, 22 Jul 2015 20:31:44 +0200
+Source: ltsp-pnp
+Binary: ltsp-pnp
+Architecture: source all
+Version: 1.0-1ubuntu7
+Distribution: UNRELEASED
+Urgency: medium
+Maintainer: Basil Stotz <stotz@amxa.ch>
+Changed-By: Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>
+Description: 
+ ltsp-pnp   - Install and manage ltsp-pnp system (on ubuntu 14.04)
+Changes: 
+ ltsp-pnp (1.0-1ubuntu7) UNRELEASED; urgency=medium
+ .
+   * TRTZRTZRTZERTZERTZ
+   * TRTZsssssssssssssssssssssss
+   * dsfgsdgsfgadfgaf
+   *   dddddddddddddddddddddddddddddddddddd
+   *     ffffffff
+   *  gggggggggggggggggggggg
+   * dddddddddd
+Checksums-Sha1: 
+ bf0d5e60c89763850287c56811eabb0ca1137998 573 ltsp-pnp_1.0-1ubuntu7.dsc
+ 501de0906eecc9ba4ddeaa45d39804d8b5734384 24069 ltsp-pnp_1.0-1ubuntu7.tar.gz
+ b9f1a6c19f1843c1a3c7b764f2b2be548a5acc1a 15726 ltsp-pnp_1.0-1ubuntu7_all.deb
+Checksums-Sha256: 
+ d56dea9c7ce1562d9ae48bfd2e038d643a59f3e6db882d90970476ad9f10ce41 573 ltsp-pnp_1.0-1ubuntu7.dsc
+ 42251bc1679ee63bff7d563ceda7ffec2967854cc2246ee011d510c9891eadf9 24069 ltsp-pnp_1.0-1ubuntu7.tar.gz
+ ae3f1c915e9b0a96ca5e81190103abae604404339571a60d71c3b7bc4e65979f 15726 ltsp-pnp_1.0-1ubuntu7_all.deb
+Files: 
+ cb76dbd657ebc0ee3ea7846e7dad2296 573 unknown optional ltsp-pnp_1.0-1ubuntu7.dsc
+ 42a16dbd91ecd70416860b1fc0e31396 24069 unknown optional ltsp-pnp_1.0-1ubuntu7.tar.gz
+ f869b55e65eaa866c4660d6bf5a57513 15726 unknown optional ltsp-pnp_1.0-1ubuntu7_all.deb

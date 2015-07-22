@@ -1,4 +1,4 @@
-TARGETS = init build clean
+TARGETS = init build clean publish
 NAME = "ltsp-pnp"
 
 .PHONY: ${TARGETS}
@@ -16,3 +16,6 @@ clean:
 
 build:
 	@./build.sh ${NAME}
+
+publish:
+	@./publish.sh ${NAME}

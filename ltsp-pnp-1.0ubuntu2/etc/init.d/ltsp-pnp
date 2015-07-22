@@ -1,0 +1,274 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          ltsp-pnp
+# Required-Start:    $local_fs $network $remote_fs $syslog
+# Required-Stop:     $local_fs $network $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <Enter a short description of the software>
+# Description:       <Enter a long description of the software>
+#                    <...>
+#                    <...>
+### END INIT INFO
+
+# Author: Basil Stotz <stotz@amxa.ch>
+
+ARC=$(dpkg --print-architecture)
+
+update_link(){
+  if test -e $ARC.img; then rm $ARC.img;fi
+  ln -s $1 $ARC.img
+}
+
+#
+# Function that starts the daemon/service
+#
+do_start()
+{
+  if test -e /opt/ltsp/images/$ARC.img; then
+    if ! test -e /var/lock/ltsp-pnp.lock; then
+       service nbd-server start
+       service dnsmasq start
+       touch /var/lock/ltsp-pnp.lock
+    fi
+  fi 
+}
+
+#
+# Function that stops the daemon/service
+#
+do_stop()
+{
+#  if test -e /var/lock/ltsp-pnp.lock; then
+    service nbd-server stop
+    service dnsmasq stop
+    if test -e /var/lock/ltsp-pnp.lock;then rm /var/lock/ltsp-pnp.lock;fi
+#  fi
+}
+
+#
+# Function that sends a SIGHUP to the daemon/service
+#
+do_reload() {
+  do_stop
+  do_start
+}
+
+do_clone() {
+
+  # Erzeugen eines Autostarts für den Unity Panel Service
+#  echo '[Desktop Entry]
+#    Type=Application
+#    Name=Unity Panel Service
+#    Exec=/usr/lib/unity/unity-panel-service
+#' >> /etc/xdg/autostart/unity-panel-service.desktop
+#    rm  /etc/xdg/autostart/unity-panel-service.desktop
+
+  mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
+
+#  if ls /boot|grep -q -v "initrd*"; then
+#    if test -d /cdrom/casper; then
+#      echo "copiing kernels from cdrom" 
+#      cp /cdrom/casper/vmlinuz.efi /boot/vmlinuz
+#      cp /cdrom/casper/initrd.lz /boot/initrd.img
+#    fi
+#  fi
+
+
+  ltsp-update-kernels
+  ltsp-update-sshkeys
+
+#  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
+
+
+  if ltsp-update-image --chroot clone-$ARC --cleanup / ; then
+     update_link clone-$ARC.img
+  fi
+
+
+  mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
+
+#  rm /etc/xdg/autostart/unity-panel-service.desktop
+
+#  service nbd-server restart
+#  do_start
+
+}
+
+do_init() {
+  if ! test -f /etc/ltsp/initialized; then
+  
+      if ! test -e /etc/apt/sources.list.d/ts_sch_gr-ppa-trusty.list; then
+         echo "upgrading LTSP installation..."
+         add-apt-repository --yes ppa:ts.sch.gr
+         apt-get --yes update
+         apt-get --yes upgrade
+      fi    
+
+      echo "configuring system..."
+      ltsp-config -o dnsmasq
+      # In Ubuntu 14.04 und höher muss dnsmasq auch als DNS fungieren                           
+      sed -i 's/^port=0/#port=0/g' /etc/dnsmasq.d/ltsp-server-dnsmasq.conf
+
+      service dnsmasq restart
+
+      # patch update-kernels.conf"                                                              
+      # Kernelupdate im LTSP-Verzeichnis                                                       
+
+#      echo "fix screen lock"
+      # Damit der Screen Lock funktioniert, müssen ltsp-client-core und ldm aktualisiert werden
+      # Zuvor muss die Datei update-kernels.conf gesichert werden                               
+#      cp /etc/ltsp/update-kernels.conf /etc/ltsp/update-kernels.bak
+#      wget http://ftp.de.debian.org/debian/pool/main/l/ltsp/ltsp-client-core_5.5.4-4_i386.deb
+#      wget http://ftp.de.debian.org/debian/pool/main/l/ldm/ldm_2.2.15-2_i386.deb
+#      dpkg -i ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
+#      rm ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
+#      mv /etc/ltsp/update-kernels.bak /etc/ltsp/update-kernels.conf
+      # Modifikation, um den Screen Lock zu ermöglichen                  
+#      sed -i 's/^disable-lock-screen=true/#disable-lock-screen=true/g' /usr/share/ltsp/init-ltsp.d/50-gsettings-overrides
+
+
+ 
+      sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
+      #???? /usr/share/ltsp/update-kernels                                                      
+
+
+      echo "set ldm background"
+      # Ersetzt den Ubuntu LTSP-Loginscreen durch den Standard-Desktophintergrund               
+      cp /usr/share/backgrounds/warty-final-ubuntu.png /usr/share/ldm/themes/ubuntu/bg.png
+
+      # Generieren der lts.conf                                                                
+
+      if ! test -d /opt/ltsp/images/; then mkdir -p /opt/ltsp/images/;fi
+      if ! test -d /var/lib/tftpboot/ltsp/$ARC; then mkdir -p /var/lib/tftpboot/ltsp/$ARC;fi
+
+      ltsp-update-kernels 
+
+
+      echo "generate lts.conf"
+      echo '[Default]                                                                           
+        # Diese Services müssen auf den Clients deaktiviert werden, um Konflikte zu vermeiden   
+        RM_SYSTEM_SERVICES="dnsmasq nbd-server ltsp-pnp"                                        
+                                                                                                
+        # Modifikation, um den Screen Lock zu ermöglichen                                       
+        LDM_PASSWORD_HASH=True                                                                  
+      ' >> /var/lib/tftpboot/ltsp/$ARC/lts.conf
+
+       #preset /etc/ltsp/this_image_name
+       echo -n "none.img" > /etc/ltsp/this_image_name
+
+    # never run again
+    touch /etc/ltsp/initialized
+  fi
+}
+
+
+do_zsync() {
+
+#   LOCAL=$(cat /etc/ltsp/this_image_name)
+
+    IMAGE="standard"
+#   if test -z "$1"; then
+    URL="http://images.amxa.ch"
+#   else
+#      URL=$1
+#   fi
+#   REMOTE=$(wget $URL/current_image_name -O - 2>/dev/null||echo $LOCAL)
+
+   if ! test -f /var/lock/ltsp-pnp-upgrade.lock; then
+
+     touch /var/lock/ltsp-pnp-upgrade.lock
+
+      if zsync $URL/$IMAGE-$ARC.img.zsync; then
+         update_link $IMAGE-$ARC.img
+      fi        
+
+#     if test "$LOCAL"!="$REMOTE"; then
+#       cd /opt/ltsp/images
+#       if ! test -e $LOCAL;then touch $LOCAL;fi
+#       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
+#         echo "$REMOTE" >/etc/ltsp/this_image_name
+#         if test -e $ARC.img; then
+#            if test -h $ARC.img; then
+#                rm $ARC.img
+#            else
+#                mv $ARC.img $ARC.clone
+#            fi
+#         fi
+#         if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
+#         ln -s $REMOTE $ARC.img
+#       fi
+#    fi
+
+    rm /var/lock/ltsp-pnp-upgrade.lock
+  fi
+}
+
+
+
+do_build(){
+
+  if ltsp-build-client --chroot build-$ARC; then
+      if ltsp-update-image --chroot build-$ARC; then
+         update_link build-$ARC.img 
+      fi
+  fi
+}
+
+
+
+do_status(){
+  echo "current images"
+  ls -lh /opt/ltsp/images/*.img
+  echo 
+  if test -e /opt/ltsp/images/$ARC.img; then
+    if test -e /var/lock/ltsp-pnp.lock; then
+       echo "the services are running"
+    else
+       echo "the image is here, but the services are stopped"
+    fi
+  else
+    echo "no image found. run \"sudo service ltsp-pnp clone\"  to generate one."
+  fi
+}
+
+case "$1" in
+  start)
+        do_start
+	;;
+  stop)
+        do_stop
+	;;
+  restart)
+        do_reload
+	;;
+  status)
+        do_status
+        ;;
+  init)
+        do_init
+        ;;
+  clone)
+        do_init
+        do_clone
+        do_reload
+	;;
+  zsync)
+        do_init
+        do_upgrade 
+        do_reload
+        ;;
+  build)
+        do_init
+        do_build
+        do_reload
+        ;;
+  *)
+	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $0 {status|start|stop|restart|init|build|clone|zsync}" >&2
+	exit 3
+	;;
+esac
+
+exit 0
+

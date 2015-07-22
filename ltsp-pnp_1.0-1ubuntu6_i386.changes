@@ -1,0 +1,33 @@
+Format: 1.8
+Date: Wed, 22 Jul 2015 20:18:51 +0200
+Source: ltsp-pnp
+Binary: ltsp-pnp
+Architecture: source all
+Version: 1.0-1ubuntu6
+Distribution: UNRELEASED
+Urgency: medium
+Maintainer: Basil Stotz <stotz@amxa.ch>
+Changed-By: Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>
+Description: 
+ ltsp-pnp   - <insert up to 60 chars description>
+Changes: 
+ ltsp-pnp (1.0-1ubuntu6) UNRELEASED; urgency=medium
+ .
+   * TRTZRTZRTZERTZERTZ
+   * TRTZsssssssssssssssssssssss
+   * dsfgsdgsfgadfgaf
+   *   dddddddddddddddddddddddddddddddddddd
+   *     ffffffff
+   *  gggggggggggggggggggggg
+Checksums-Sha1: 
+ 4b04c8c85427a87f416f6f1fb0e798eb595e6d0e 570 ltsp-pnp_1.0-1ubuntu6.dsc
+ 87034f97797932b90a31f346ee0f0e95a71d6a8d 9864 ltsp-pnp_1.0-1ubuntu6.tar.gz
+ 9e9a1a3b8ebe32f9e050db1404a6cac06d65e7a3 1178 ltsp-pnp_1.0-1ubuntu6_all.deb
+Checksums-Sha256: 
+ 9b0a91b31e66067fd4e17a43fd9bdeb2b245e1b23b924a86f01b9854b63a2f32 570 ltsp-pnp_1.0-1ubuntu6.dsc
+ 153a15dca9049f114e0bec32ad14657c44b37ba6d1f7247befd9094fd3b3f873 9864 ltsp-pnp_1.0-1ubuntu6.tar.gz
+ 1b65ef901e6bc11c6b3c62b2b23d79acf4300a539ad7a89b3e544fc77e5eb5f7 1178 ltsp-pnp_1.0-1ubuntu6_all.deb
+Files: 
+ bc98a674e34ae4e0883a2660ed338b45 570 unknown optional ltsp-pnp_1.0-1ubuntu6.dsc
+ 425b76be8ee4a80c5eaef43ec4573638 9864 unknown optional ltsp-pnp_1.0-1ubuntu6.tar.gz
+ e3311d71978a987544946ebafcb53042 1178 unknown optional ltsp-pnp_1.0-1ubuntu6_all.deb
