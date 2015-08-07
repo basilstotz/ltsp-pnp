@@ -82,6 +82,10 @@ do_clone() {
 
 #  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
+  if test -d $BASIS/clone-$ARC;then
+    if test -d $BASIS/clone-$ARC.old; then rm $BASIS/clone-$ARC.old;fi 
+    mv $BASIS/clone-$ARC $BASIS/clone-$ARC.old;
+  fi
 
   if test -e $BASIS/$ARC.img; then rm $BASIS/$ARC.img;fi
 
