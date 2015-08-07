@@ -14,10 +14,12 @@
 # Author: Basil Stotz <stotz@amxa.ch>
 
 ARC=$(dpkg --print-architecture)
+BASIS="/opt/ltsp/images"
 
 update_link(){
-  if test -e $ARC.img; then rm $ARC.img;fi
-  ln -s $1 $ARC.img
+  if test -e $BASIS/$ARC.img; then rm $BASIS/$ARC.img;fi
+  chmod a+r $BASIS/*.img
+  ln -s $BASIS/$1 $BASIS/$ARC.img
 }
 
 #
@@ -81,12 +83,12 @@ do_clone() {
 #  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
 
-  if test -e $ARC.img; then rm $ARC.img;fi
+  if test -e $BASIS/$ARC.img; then rm $BASIS/$ARC.img;fi
 
   ltsp-update-image --cleanup / 
 
-  mv $ARC.img clone-$ARC.img
-  update_link clone-$ARC.img
+  mv $BASIS/$ARC.img $BASIS/clone-$ARC.img
+  update_link $BASIS/clone-$ARC.img
 
 
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
@@ -182,8 +184,9 @@ do_zsync() {
 
      touch /var/lock/ltsp-pnp-upgrade.lock
 
-      if zsync $URL/$IMAGE-$ARC.img.zsync; then
-         update_link $IMAGE-$ARC.img
+
+      if $(cd $BASIS;zsync $URL/$IMAGE-$ARC.img.zsync); then
+         update_link $BASIS/$IMAGE-$ARC.img
       fi        
 
 #     if test "$LOCAL"!="$REMOTE"; then
@@ -211,9 +214,10 @@ do_zsync() {
 
 do_build(){
 
+  if test -d $BASIS/../build-$ARC; then rm -r $BASIS/../build-$ARC;fi
   if ltsp-build-client --chroot build-$ARC; then
-      if ltsp-update-image --chroot build-$ARC; then
-         update_link build-$ARC.img 
+      if ltsp-update-image build-$ARC; then
+         update_link $BASIS/build-$ARC.img 
       fi
   fi
 }
@@ -258,7 +262,7 @@ case "$1" in
 	;;
   zsync)
         do_init
-        do_upgrade 
+        do_zsync 
         do_reload
         ;;
   build)

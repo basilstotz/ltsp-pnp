@@ -1,0 +1,35 @@
+Format: 1.8
+Date: Fri, 07 Aug 2015 13:36:47 +0200
+Source: ltsp-pnp
+Binary: ltsp-pnp
+Architecture: source all
+Version: 1.0-1ubuntu16
+Distribution: UNRELEASED
+Urgency: medium
+Maintainer: Basil Stotz <stotz@amxa.ch>
+Changed-By: Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>
+Description: 
+ ltsp-pnp   - Install and manage ltsp-pnp system (on ubuntu 14.04)
+Changes: 
+ ltsp-pnp (1.0-1ubuntu16) UNRELEASED; urgency=medium
+ .
+   * fixed bug for cloning
+   * new makefile
+   * fixed zsync mode
+   * fixed paths
+   * fixed zsync
+   * remove chroot before building
+   * minor changes
+   * fixed nbd-server problem
+Checksums-Sha1: 
+ 8f2ebe7e7c1ba9115c48e29d631929d2f7411d5f 577 ltsp-pnp_1.0-1ubuntu16.dsc
+ 47eb165da3c1d8031db8edd01d84e243e2ba274e 24346 ltsp-pnp_1.0-1ubuntu16.tar.gz
+ 6d2b31c633dd1ac8574a9d656742dce5b0b79909 15966 ltsp-pnp_1.0-1ubuntu16_all.deb
+Checksums-Sha256: 
+ ab91d77b72c24bd68ab3e43c2aa38c0476275701ffb88697c663baad990a36ea 577 ltsp-pnp_1.0-1ubuntu16.dsc
+ 046000d872d662208a0bbb2e313fafabb7235aa4bcf2a7f59b39592c3cd9c85a 24346 ltsp-pnp_1.0-1ubuntu16.tar.gz
+ e95d817ba1c08d095610fad97fbaf33fb07ed8263fff7589bf5d621020ea5328 15966 ltsp-pnp_1.0-1ubuntu16_all.deb
+Files: 
+ 40f4de21c150a0ff40f5ef803cb78eac 577 unknown optional ltsp-pnp_1.0-1ubuntu16.dsc
+ 891ea4ccd58ef72537933076ce12a34b 24346 unknown optional ltsp-pnp_1.0-1ubuntu16.tar.gz
+ 9e72679b58f5705e3cd88bf9dd0f2480 15966 unknown optional ltsp-pnp_1.0-1ubuntu16_all.deb
