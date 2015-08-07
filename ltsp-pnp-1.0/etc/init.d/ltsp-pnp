@@ -81,9 +81,12 @@ do_clone() {
 #  echo "ltsp-clone-$(date)" >/etc/ltsp/this_image_name
 
 
-  if ltsp-update-image --chroot clone-$ARC --cleanup / ; then
-     update_link clone-$ARC.img
-  fi
+  if test -e $ARC.img; then rm $ARC.img;fi
+
+  ltsp-update-image --cleanup / 
+
+  mv $ARC.img clone-$ARC.img
+  update_link clone-$ARC.img
 
 
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop

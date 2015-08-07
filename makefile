@@ -17,3 +17,5 @@ clean:
 build:
 	@./bin/build.sh ${NAME}
 
+publish:
+	@./bin/publish.sh 
