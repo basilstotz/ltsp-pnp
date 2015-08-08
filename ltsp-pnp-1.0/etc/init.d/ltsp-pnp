@@ -25,7 +25,7 @@ update_link(){
 
 do_link(){
    case $1 in
-     clone|build)
+     clone|build|zsync)
         if test "$1"="zsync"; then
            NAME=$IMAGE
         else
