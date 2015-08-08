@@ -1,4 +1,4 @@
-ltsp-pnp (1.0-1ubuntu17) UNRELEASED; urgency=medium
+ltsp-pnp (1.0-1ubuntu21) UNRELEASED; urgency=medium
 
  
   * fixed bug for cloning 
@@ -10,8 +10,12 @@ ltsp-pnp (1.0-1ubuntu17) UNRELEASED; urgency=medium
   * minor changes
   * fixed nbd-server problem
   * newnames for images
+  * fixed link to image
+  * added dependency gksu 
+  * start ltsp-pnp later (30)
+  *   "      "       "   (80)
 
- -- Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>  Fri, 07 Aug 2015 15:12:23 +0200
+ -- Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>  Sat, 08 Aug 2015 15:56:16 +0200
 
 ltsp-pnp (1.0-1) unstable; urgency=low
 

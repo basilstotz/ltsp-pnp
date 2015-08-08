@@ -92,7 +92,7 @@ do_clone() {
   ltsp-update-image --cleanup / 
 
   mv $BASIS/$ARC.img $BASIS/clone-$ARC.img
-  update_link $BASIS/clone-$ARC.img
+  update_link clone-$ARC.img
 
 
   mv /usr/share/applications/ltsp-pnp.desktop.off /usr/share/applications/ltsp-pnp.desktop
@@ -190,7 +190,7 @@ do_zsync() {
 
 
       if $(cd $BASIS;zsync $URL/$IMAGE-$ARC.img.zsync); then
-         update_link $BASIS/$IMAGE-$ARC.img
+         update_link $IMAGE-$ARC.img
       fi        
 
 #     if test "$LOCAL"!="$REMOTE"; then
@@ -221,7 +221,7 @@ do_build(){
   if test -d $BASIS/../build-$ARC; then rm -r $BASIS/../build-$ARC;fi
   if ltsp-build-client --chroot build-$ARC; then
       if ltsp-update-image build-$ARC; then
-         update_link $BASIS/build-$ARC.img 
+         update_link build-$ARC.img 
       fi
   fi
 }

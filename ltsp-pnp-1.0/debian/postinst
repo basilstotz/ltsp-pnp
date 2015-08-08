@@ -29,7 +29,8 @@ case "$1" in
       update-rc.d -f nbd-server remove
       echo "installing and starting ltsp-pnp services"
       chmod u+x /etc/init.d/ltsp-pnp
-      update-rc.d ltsp-pnp defaults
+      update-rc.d -f ltsp-pnp remove
+      update-rc.d ltsp-pnp defaults 80
       service ltsp-pnp start
       echo
       echo "done"
