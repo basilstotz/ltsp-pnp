@@ -35,8 +35,8 @@ do_link(){
            update_link $NAME-$ARC.img
            $0 restart
         else
-           echo "error: $1-$ARC.img does not exist."
-           echo "       use: \"$0 $1\" to gererate"
+           echo "error: $NAME-$ARC.img does not exist."
+           echo "       hint: $0 $1"
         ;;
      *)
         echo "usage: $0 link [clone|build|zsync]"

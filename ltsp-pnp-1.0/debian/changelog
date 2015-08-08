@@ -1,4 +1,4 @@
-ltsp-pnp (1.0-1ubuntu23) UNRELEASED; urgency=medium
+ltsp-pnp (1.0-1ubuntu25) UNRELEASED; urgency=medium
 
  
   * fixed bug for cloning 
@@ -16,8 +16,10 @@ ltsp-pnp (1.0-1ubuntu23) UNRELEASED; urgency=medium
   *   "      "       "   (80)
   * use /etc/default/ltsp-pnp; new command link 
   * fixed command link
+  * added  /etc/default/ltsp-pnp
+  * fixed error
 
- -- Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>  Sat, 08 Aug 2015 22:28:56 +0200
+ -- Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>  Sat, 08 Aug 2015 22:36:44 +0200
 
 ltsp-pnp (1.0-1) unstable; urgency=low
 
