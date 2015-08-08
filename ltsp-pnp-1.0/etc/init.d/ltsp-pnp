@@ -25,11 +25,17 @@ update_link(){
 
 do_link(){
    case $1 in
-     clone|build|zsync)
-        if test -e $BASIS/$1-$ARC; then
-           update_link $1-$ARC
+     clone|build)
+        if test "$1"="zsync"; then
+           NAME=$IMAGE
         else
-           echo "error: $1-$ARC does not exist."
+           NAME=$1
+        fi
+        if test -e $BASIS/$NAME-$ARC.img; then
+           update_link $NAME-$ARC.img
+           $0 restart
+        else
+           echo "error: $1-$ARC.img does not exist."
            echo "       use: \"$0 $1\" to gererate"
         ;;
      *)
