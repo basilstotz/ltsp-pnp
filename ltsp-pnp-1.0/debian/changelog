@@ -1,4 +1,4 @@
-ltsp-pnp (1.0-1ubuntu21) UNRELEASED; urgency=medium
+ltsp-pnp (1.0-1ubuntu22) UNRELEASED; urgency=medium
 
  
   * fixed bug for cloning 
@@ -14,8 +14,9 @@ ltsp-pnp (1.0-1ubuntu21) UNRELEASED; urgency=medium
   * added dependency gksu 
   * start ltsp-pnp later (30)
   *   "      "       "   (80)
+  * use /etc/default/ltsp-pnp; new command link 
 
- -- Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>  Sat, 08 Aug 2015 15:56:16 +0200
+ -- Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>  Sat, 08 Aug 2015 22:13:22 +0200
 
 ltsp-pnp (1.0-1) unstable; urgency=low
 

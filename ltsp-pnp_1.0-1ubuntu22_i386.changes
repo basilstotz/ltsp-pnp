@@ -1,0 +1,41 @@
+Format: 1.8
+Date: Sat, 08 Aug 2015 22:13:22 +0200
+Source: ltsp-pnp
+Binary: ltsp-pnp
+Architecture: source all
+Version: 1.0-1ubuntu22
+Distribution: UNRELEASED
+Urgency: medium
+Maintainer: Basil Stotz <stotz@amxa.ch>
+Changed-By: Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>
+Description: 
+ ltsp-pnp   - Install and manage ltsp-pnp system (on ubuntu 14.04)
+Changes: 
+ ltsp-pnp (1.0-1ubuntu22) UNRELEASED; urgency=medium
+ .
+   * fixed bug for cloning
+   * new makefile
+   * fixed zsync mode
+   * fixed paths
+   * fixed zsync
+   * remove chroot before building
+   * minor changes
+   * fixed nbd-server problem
+   * newnames for images
+   * fixed link to image
+   * added dependency gksu
+   * start ltsp-pnp later (30)
+   *   "      "       "   (80)
+   * use /etc/default/ltsp-pnp; new command link
+Checksums-Sha1: 
+ c18e1af83f60571ba8b374a7604e7466d190693d 577 ltsp-pnp_1.0-1ubuntu22.dsc
+ 1b4dbba6cb06a587aa3fa34db44df22e5511acd2 24054 ltsp-pnp_1.0-1ubuntu22.tar.gz
+ 53529b480d4c93c77b29f2d214dfd59d3e3607b5 15812 ltsp-pnp_1.0-1ubuntu22_all.deb
+Checksums-Sha256: 
+ e4001bc6651c5a432dc55c8369842bafd51feb40e931894de620f2e63ec769f9 577 ltsp-pnp_1.0-1ubuntu22.dsc
+ 0bee6b8d9f4ac65cd552bb35bc60d0290bcea67e1a1d0155d85722c120a42293 24054 ltsp-pnp_1.0-1ubuntu22.tar.gz
+ 64b29843f480f05a64c313cfb48565c4bb948a75b255cc07490dcd15bf836e17 15812 ltsp-pnp_1.0-1ubuntu22_all.deb
+Files: 
+ 8fb4d39c658c482cb4fc52c69405892f 577 unknown optional ltsp-pnp_1.0-1ubuntu22.dsc
+ 2af98ce116623ffca8093b4363d8375f 24054 unknown optional ltsp-pnp_1.0-1ubuntu22.tar.gz
+ 40ffe1357cb923ab96ce08c9e3e34192 15812 unknown optional ltsp-pnp_1.0-1ubuntu22_all.deb

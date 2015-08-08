@@ -22,6 +22,23 @@ update_link(){
   ln -s $BASIS/$1 $BASIS/$ARC.img
 }
 
+
+do_link(){
+   case $1 in
+     clone|build|zsync)
+        if test -e $BASIS/$1-$ARC; then
+           update_link $1-$ARC
+        else
+           echo "error: $1-$ARC does not exist."
+           echo "       use: \"$0 $1\" to gererate"
+        ;;
+     *)
+        echo "usage: $0 link [clone|build|zsync]"
+        ;;
+   esac
+}
+    
+
 #
 # Function that starts the daemon/service
 #
@@ -58,23 +75,9 @@ do_reload() {
 
 do_clone() {
 
-  # Erzeugen eines Autostarts für den Unity Panel Service
-#  echo '[Desktop Entry]
-#    Type=Application
-#    Name=Unity Panel Service
-#    Exec=/usr/lib/unity/unity-panel-service
-#' >> /etc/xdg/autostart/unity-panel-service.desktop
-#    rm  /etc/xdg/autostart/unity-panel-service.desktop
 
   mv /usr/share/applications/ltsp-pnp.desktop /usr/share/applications/ltsp-pnp.desktop.off
 
-#  if ls /boot|grep -q -v "initrd*"; then
-#    if test -d /cdrom/casper; then
-#      echo "copiing kernels from cdrom" 
-#      cp /cdrom/casper/vmlinuz.efi /boot/vmlinuz
-#      cp /cdrom/casper/initrd.lz /boot/initrd.img
-#    fi
-#  fi
 
 
   ltsp-update-kernels
@@ -124,18 +127,6 @@ do_init() {
       # patch update-kernels.conf"                                                              
       # Kernelupdate im LTSP-Verzeichnis                                                       
 
-#      echo "fix screen lock"
-      # Damit der Screen Lock funktioniert, müssen ltsp-client-core und ldm aktualisiert werden
-      # Zuvor muss die Datei update-kernels.conf gesichert werden                               
-#      cp /etc/ltsp/update-kernels.conf /etc/ltsp/update-kernels.bak
-#      wget http://ftp.de.debian.org/debian/pool/main/l/ltsp/ltsp-client-core_5.5.4-4_i386.deb
-#      wget http://ftp.de.debian.org/debian/pool/main/l/ldm/ldm_2.2.15-2_i386.deb
-#      dpkg -i ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
-#      rm ltsp-client-core_5.5.4-4_i386.deb ldm_2.2.15-2_i386.deb
-#      mv /etc/ltsp/update-kernels.bak /etc/ltsp/update-kernels.conf
-      # Modifikation, um den Screen Lock zu ermöglichen                  
-#      sed -i 's/^disable-lock-screen=true/#disable-lock-screen=true/g' /usr/share/ltsp/init-ltsp.d/50-gsettings-overrides
-
 
  
       sed -i 's/^#IPAPPEND=3/IPAPPEND=3/g' /etc/ltsp/update-kernels.conf
@@ -175,14 +166,7 @@ do_init() {
 do_zsync() {
 
 #   LOCAL=$(cat /etc/ltsp/this_image_name)
-
-    IMAGE="standard"
-#   if test -z "$1"; then
-    URL="http://images.amxa.ch"
-#   else
-#      URL=$1
-#   fi
-#   REMOTE=$(wget $URL/current_image_name -O - 2>/dev/null||echo $LOCAL)
+    
 
    if ! test -f /var/lock/ltsp-pnp-upgrade.lock; then
 
@@ -243,6 +227,14 @@ do_status(){
   fi
 }
 
+if test -e /etc/default/ltsp-pnp; then
+      . /etc/default/ltsp-pnp
+else
+      IMAGE="standard"
+      URL="http://images.amxa.ch"
+fi
+
+
 case "$1" in
   start)
         do_start
@@ -273,6 +265,9 @@ case "$1" in
         do_init
         do_build
         do_reload
+        ;;
+  link)
+        do_link $1
         ;;
   *)
 	#echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
