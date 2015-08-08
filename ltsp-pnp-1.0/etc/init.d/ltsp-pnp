@@ -183,22 +183,6 @@ do_zsync() {
          update_link $IMAGE-$ARC.img
       fi        
 
-#     if test "$LOCAL"!="$REMOTE"; then
-#       cd /opt/ltsp/images
-#       if ! test -e $LOCAL;then touch $LOCAL;fi
-#       if zsync -i $LOCAL $URL/$REMOTE.zsync; then
-#         echo "$REMOTE" >/etc/ltsp/this_image_name
-#         if test -e $ARC.img; then
-#            if test -h $ARC.img; then
-#                rm $ARC.img
-#            else
-#                mv $ARC.img $ARC.clone
-#            fi
-#         fi
-#         if test "$LOCAL"!="$REMOTE"; then rm $LOCAL;fi
-#         ln -s $REMOTE $ARC.img
-#       fi
-#    fi
 
     rm /var/lock/ltsp-pnp-upgrade.lock
   fi
