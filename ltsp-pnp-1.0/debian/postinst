@@ -32,9 +32,9 @@ case "$1" in
       update-rc.d -f ltsp-pnp remove
       update-rc.d ltsp-pnp defaults 80
       service ltsp-pnp start
-      echo
+      echo ""
       echo "done"
-      echo
+      echo ""
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

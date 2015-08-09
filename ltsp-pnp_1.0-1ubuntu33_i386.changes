@@ -1,0 +1,52 @@
+Format: 1.8
+Date: Sun, 09 Aug 2015 15:24:31 +0200
+Source: ltsp-pnp
+Binary: ltsp-pnp
+Architecture: source all
+Version: 1.0-1ubuntu33
+Distribution: UNRELEASED
+Urgency: medium
+Maintainer: Basil Stotz <stotz@amxa.ch>
+Changed-By: Stotz Basil <stotz.basil@alle-lap-001.basel.opinsys.fi>
+Description: 
+ ltsp-pnp   - Install and manage ltsp-pnp system (on ubuntu 14.04)
+Changes: 
+ ltsp-pnp (1.0-1ubuntu33) UNRELEASED; urgency=medium
+ .
+   * fixed bug for cloning
+   * new makefile
+   * fixed zsync mode
+   * fixed paths
+   * fixed zsync
+   * remove chroot before building
+   * minor changes
+   * fixed nbd-server problem
+   * newnames for images
+   * fixed link to image
+   * added dependency gksu
+   * start ltsp-pnp later (30)
+   *   "      "       "   (80)
+   * use /etc/default/ltsp-pnp; new command link
+   * fixed command link
+   * added  /etc/default/ltsp-pnp
+   * fixed error
+   * minor error  fixed
+   * test
+   * test
+   * fixed missing fi
+   * fixed command link
+   * better messages
+   * changed zsync to remote
+   * better interface
+Checksums-Sha1: 
+ ed7ae955e952f37fc7dc66baac884fd6f6bd0804 577 ltsp-pnp_1.0-1ubuntu33.dsc
+ 2d2559c7095661057c0c068f1262e82649eba159 24100 ltsp-pnp_1.0-1ubuntu33.tar.gz
+ 44996102c08f3cd94ed402ec3a2e7bab198e1e75 15922 ltsp-pnp_1.0-1ubuntu33_all.deb
+Checksums-Sha256: 
+ 1853c6b40a3dbe39b0ce72fb11451553ad380005eb49b64c25ff4a70bc49d388 577 ltsp-pnp_1.0-1ubuntu33.dsc
+ 7d31b5715d53cb862a4b11a10d2dcbec9b2945471766c98b1da8f00fa566806b 24100 ltsp-pnp_1.0-1ubuntu33.tar.gz
+ 892a108c705e853b2d27f46908d0f6f6a32ddee416883381c2fb04e71de6f64e 15922 ltsp-pnp_1.0-1ubuntu33_all.deb
+Files: 
+ cc7f6f6a71f8bae83f370048b0719211 577 unknown optional ltsp-pnp_1.0-1ubuntu33.dsc
+ 7f5848fc987cd277585574e0f30afc11 24100 unknown optional ltsp-pnp_1.0-1ubuntu33.tar.gz
+ 1d884dfc31d55e6e2051b8b9fd8c5093 15922 unknown optional ltsp-pnp_1.0-1ubuntu33_all.deb

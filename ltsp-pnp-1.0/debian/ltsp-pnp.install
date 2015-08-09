@@ -1,5 +1,6 @@
 ./etc/init.d/* ./etc/init.d/
 ./etc/ltsp/* ./etc/ltsp/
+./etc/default/* ./etc/default/
 ./usr/share/pixmaps/ltsp-pnp.png ./usr/share/pixmaps/
 ./usr/share/applications/ltsp-pnp.desktop ./usr/share/applications/
 
