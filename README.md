@@ -2,6 +2,10 @@
 
 see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (german!) instructions. 
 
+## Extremly Easy LTSP
+
+This package allows unexperienced users to deploy an ltsp-server without any configuration.
+
 ## Vanilla LTSP.
 
 This guide shows how to install a vanilla Ubuntu LTSP-PNP server. Vanilla LTSP-PNP is suited for small orgnizations with a few (maybe max. 20) Users with the about the same amount of clients. 
@@ -37,13 +41,14 @@ Any computer with can run Ubuntu can be used as server. It should have:
 
 ### Server Setup 
 
-* Install a common ubuntu 14.04 (i386 desktop-edition: ubuntu-14.0X.2-desktop-i386.iso . Don't worry: A standard 32-bit installlation manages any amount of memory!
+* Install a common ubuntu 14.04 or use an existing installation. 
 
 * tip: configure now your router to  serve static IP addresses to this server.If done, be shure that the ltp-server got new new static address before proceeding.
 
-* Install ltsp-pnp_1.0_all.deb (this deb!)
-
-* run "sudo /opt/ltsp-pnp/bin/ltsp-pnp-install"
+* add a file "/etc/apt/sources.list.d/amxa-archive.list" with just the following line as content: deb http://archive.amxa.ch/ubuntu trusty main
+* sudo apt-get update
+* sudo apt-get install ltsp-pnp
+* search "ltsp-pnp" in the unity dash and start it. Wait until the window closes.
 
 
 ## Client
@@ -81,9 +86,18 @@ All clients are exactly equal to the server:
 
 To propagate all these changes to clients you must run: 
 
-"sudo /opt/ltsp-pnp/bin/ltsp-pnp-update-image"
+ltsp-pnp
 
 This command clones all server features to all clients. It takes some minutes and all clients have, after a reboot, all new fetures.
+
+## Advanced Usage
+
+This is work in progress....
+
+The ltsp-server can be controlled with
+
+sudo service ltsp-pnp [status|start|stop|restart|init|clone|build]
+
 
 ## OT Info: LTSP vs Puavo
 
