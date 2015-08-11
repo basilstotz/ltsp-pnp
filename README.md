@@ -101,7 +101,7 @@ sudo service ltsp-pnp [status|start|stop|restart|init|clone|build]
 
 ## OT Info: LTSP vs Puavo
 
-Puavo is directly built on top of LTSP and adds some important features:
+Puavo (see www.puavo.org developed by www.opinsys.fi) is directly built on top of LTSP and adds some important features:
 
 * Puavo can handle laptops. These LTSP laptops also work over wlan or  even without an network connection.
 
