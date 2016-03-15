@@ -7,9 +7,10 @@
 This repo is a wrapper around the ltsp-pnp-system developped by Alkis Georgopoulos on https://launchpad.net/~alkisg ! Alkis told me that (most) of the functionality of this repo will (soon) be default of his (resp. the official Ubuntu-) package. So  this repo will be (or maybe allready is) obsolete. 
 
 
-see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (german!) instructions. 
 
 ## Extremly Easy LTSP
+
+(see https://wiki.ubuntuusers.de/LTSP/LTSP-PNP_mit_Fat_Clients for detailed (german!) instructions.) 
 
 This package allows unexperienced users to deploy an ltsp-server without any configuration.
 
